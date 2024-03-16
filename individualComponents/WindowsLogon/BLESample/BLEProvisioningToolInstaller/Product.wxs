@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Wix RequiredVersion="3.8.1128.0" 
+     xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+
+  <?define ProductVersion=!(bind.FileVersion.MainToolExe)?>
+  <?if $(var.Platform) = x64 ?>
+  <?define ProductName = "BLE Provisioning Tool (64 bit)" ?>
+  <?define ProductNameShort="BLEProvTool64"?>
+  <?define UpgradeCode="{F701423A-5D66-4223-81D9-859DE1117571}"?>
+  <?define Win64 = "yes" ?>
+  <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
+  <?else ?>
+  <?define ProductName = "BLE Provisioning Tool" ?>
+  <?define ProductNameShort="BLEProvTool"?>
+  <?define UpgradeCode="{AE7D5831-6944-40FF-86A8-5C8D6231FDC9}"?>
+  <?define Win64 = "no" ?>
+  <?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
+  <?endif ?>
+
+  <Product Id="*"
+   Name="$(var.ProductName) $(var.ProductVersion)"
+   Language="1033"
+   Version="$(var.ProductVersion)"
+   Manufacturer="Mi-Token Inc."
+   UpgradeCode="$(var.UpgradeCode)">
+
+    <Package Id="*"
+      InstallerVersion="300"
+      Compressed="yes"
+      InstallScope="perMachine"
+      InstallPrivileges="elevated"
+      Comments="This installer contains the logic and data required to install $(var.ProductName)."
+      Keywords="Installer"
+      Description="$(var.ProductName) $(var.ProductVersion)"
+      Manufacturer="Mi-Token Inc." />
+
+    <MediaTemplate EmbedCab="yes" />
+
+    <Feature Id="ProductFeature" Title="$(var.ProductName) $(var.ProductVersion)" Level="1" Absent="disallow">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentRef Id="ApplicationShortcut" />
+      <ComponentRef Id="DesktopShortcut" />
+    </Feature>
+
+    <!--
+       SELFFOUND:     Disallow installing over and over again, should use Repair option instead.
+       NEWERFOUND:    Prevent accidental downgrade, if it's intentional then uninstall first. 
+   -->
+    <Upgrade Id="$(var.UpgradeCode)">
+      <UpgradeVersion Property="NEWERVERSIONDETECTED" OnlyDetect="yes"
+                      Minimum="$(var.ProductVersion)" IncludeMinimum="no"/>
+      <UpgradeVersion Property="OLDERVERSIONBEINGUPGRADED"
+                      Minimum="0.0.0" IncludeMinimum="yes"
+                      Maximum="$(var.ProductVersion)" IncludeMaximum="yes" />
+    </Upgrade>
+
+
+    <Condition Message="$(var.ProductName) is only supported on Windows XP, Windows Server 2003 or higher.">
+      <![CDATA[Installed OR (VersionNT >= 601)]]>
+    </Condition>
+
+    <Condition Message="Administrative privilege is required to install $(var.ProductName).">
+      Privileged
+    </Condition>
+
+    <Condition Message="A later version of $(var.ProductName) is already installed.">NOT NEWERVERSIONDETECTED</Condition>
+
+    <Condition Message="This application requires 64-bit Windows.">
+      Msix64
+    </Condition>
+
+    <PropertyRef Id="NETFRAMEWORK45" />
+    <Condition Message="This application requires .NET Framework 4.5. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR NETFRAMEWORK45]]>
+    </Condition>
+
+    <UIRef Id="WixUI_Minimal" />
+    <UIRef Id="WixUI_ErrorProgressText" />
+    <Icon Id="icon.exe" SourceFile="$(var.BleTool.TargetPath)"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.exe" />
+    <WixVariable Id='WixUIBannerBmp' Value='../../../radius/setup/Banner_top.bmp' />
+    <WixVariable Id='WixUIDialogBmp' Value='../../../radius/setup/Banner_left.bmp' />
+    <WixVariable Id='WixUILicenseRtf' Value='../../../radius/setup/MiTokenLicense.rtf' />
+    <WixVariable Id="ProductNameShort" Value="$(var.ProductNameShort)" />
+
+    <!-- Terminate <Product> here and split the rest of it into multiple <Fragment> sections -->
+  </Product>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="MainTool" Guid="*" Win64="$(var.Win64)">
+        <File Id="MainToolExe" Source="$(var.BleTool.TargetPath)" KeyPath="yes"  />
+      </Component>
+      <Component Id="ManagedOpenSsl" Guid="*" Win64="$(var.Win64)">
+        <File Id="ManagedOpenSslDll" Source="$(var.OpenSsl.TargetPath)" KeyPath="yes" />
+      </Component>
+      <Component Id="BleApi" Guid="*" Win64="$(var.Win64)">
+        <File Id="BleApiDll" Source="$(var.BleApi.TargetPath)" KeyPath="yes" />
+      </Component>
+      <Component Id="Libeay32" Guid="*" Win64="$(var.Win64)">
+        <File Id="Libeay32Dll" Source="$(var.SolutionDir)..\build\x64\$(var.Configuration)\libeay32.dll" KeyPath="yes" />
+      </Component>
+      <Component Id="Ssleay32" Guid="*" Win64="$(var.Win64)">
+        <File Id="Ssleay32Dll" Source="$(var.SolutionDir)..\build\x64\$(var.Configuration)\ssleay32.dll" KeyPath="yes" />
+      </Component>
+      <Component Id="BLEDLLV2" Guid="*" Win64="$(var.Win64)">
+        <File Id="BLEDLLV2Dll" Source="$(var.SolutionDir)..\build\x64\$(var.Configuration)\BLEDLLV2.dll" KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="WINDOWSVOLUME">
+        <!-- avoid volume (maybe remote) with the largest free space -->
+        <Directory Id="DesktopFolder"/>
+        <Directory Id="ProgramMenuFolder">
+          <Directory Id="ApplicationProgramsFolder" Name="Mi-Token"/>
+        </Directory>
+        <Directory Id="$(var.PlatformProgramFilesFolder)">
+          <Directory Id="CompanyFolder" Name="Mi-Token">
+            <Directory Id="INSTALLFOLDER" Name="BLE Provisioning Tool" />
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+    <SetDirectory Id="WINDOWSVOLUME" Value="[WindowsVolume]"/>
+  </Fragment>
+
+  <Fragment>
+    <!-- Desktop shortcut -->
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="DesktopShortcut" Guid="*">
+        <Shortcut  Id="ApplicationDesktopShortcut"
+                    Directory="DesktopFolder"
+                    Name="BLE Provisioning Tool"
+                    Target="[INSTALLFOLDER]BLE Provisioning Tool.exe"
+                    WorkingDirectory="INSTALLFOLDER"
+                    Description="$(var.ProductName)"
+                    Icon="icon.exe" />
+        <RemoveFolder Id="DesktopFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\Mi-Token\BLE Provisioning Tool" Name="Desktop Shortcut" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+
+    <!-- Start Menu shortcut-->
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="*">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+                  Directory="ApplicationProgramsFolder"
+                  Name="BLE Provisioning Tool"
+                  Target="[INSTALLFOLDER]BLE Provisioning Tool.exe"
+                  WorkingDirectory="INSTALLFOLDER"
+                  Description="$(var.ProductName)"
+                  Icon="icon.exe" />
+        <Shortcut Id="UninstallProduct"
+                  Name="Uninstall BLE Provisioning Tool"
+                  Description="Uninstall BLE Provisioning Tool"
+                  Target="[SystemFolder]msiexec.exe"
+                  Arguments="/x [ProductCode]"/>
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\Mi-Token\BLE Provisioning Tool" Name="Start Menu Shortcut" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+
+  <Fragment>
+    <InstallExecuteSequence>
+      <RemoveExistingProducts After="InstallInitialize"/>
+    </InstallExecuteSequence>
+
+  </Fragment>
+
+
+</Wix>

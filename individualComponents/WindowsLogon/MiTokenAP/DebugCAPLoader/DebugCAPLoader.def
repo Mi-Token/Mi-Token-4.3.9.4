@@ -1,0 +1,5 @@
+LIBRARY DebugCAPLoader
+
+EXPORTS
+	SpLsaModeInitialize
+	SpUserModeInitialize

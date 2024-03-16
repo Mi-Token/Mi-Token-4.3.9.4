@@ -1,0 +1,12 @@
+--- BLELibV2.vcxproj.filters
++++ BLELibV2.vcxproj.filters
+@@ -95,9 +95,6 @@
+     <ClInclude Include="BLE_API_Types.h">
+       <Filter>Header Files</Filter>
+     </ClInclude>
+-    <ClInclude Include="BLE_API_UnitTest.h">
+-      <Filter>Header Files</Filter>
+-    </ClInclude>
+     <ClInclude Include="DebugLogging.h">
+       <Filter>Header Files</Filter>
+     </ClInclude>

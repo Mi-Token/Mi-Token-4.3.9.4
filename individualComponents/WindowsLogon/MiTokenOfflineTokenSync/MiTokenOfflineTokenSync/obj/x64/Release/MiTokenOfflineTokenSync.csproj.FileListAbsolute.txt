@@ -1,0 +1,8 @@
+E:\MiToken\WindowsLogon\MiTokenOfflineTokenSync\MiTokenOfflineTokenSync\bin\x64\Release\MiTokenOfflineTokenSync.exe.config
+E:\MiToken\WindowsLogon\MiTokenOfflineTokenSync\MiTokenOfflineTokenSync\bin\x64\Release\MiTokenOfflineTokenSync.exe
+E:\MiToken\WindowsLogon\MiTokenOfflineTokenSync\MiTokenOfflineTokenSync\bin\x64\Release\MiTokenOfflineTokenSync.pdb
+E:\MiToken\WindowsLogon\MiTokenOfflineTokenSync\MiTokenOfflineTokenSync\obj\x64\Release\MiTokenOfflineTokenSync.csprojResolveAssemblyReference.cache
+E:\MiToken\WindowsLogon\MiTokenOfflineTokenSync\MiTokenOfflineTokenSync\obj\x64\Release\MiTokenOfflineTokenSync.ProjectInstaller.resources
+E:\MiToken\WindowsLogon\MiTokenOfflineTokenSync\MiTokenOfflineTokenSync\obj\x64\Release\MiTokenOfflineTokenSync.csproj.GenerateResource.Cache
+E:\MiToken\WindowsLogon\MiTokenOfflineTokenSync\MiTokenOfflineTokenSync\obj\x64\Release\MiTokenOfflineTokenSync.exe
+E:\MiToken\WindowsLogon\MiTokenOfflineTokenSync\MiTokenOfflineTokenSync\obj\x64\Release\MiTokenOfflineTokenSync.pdb

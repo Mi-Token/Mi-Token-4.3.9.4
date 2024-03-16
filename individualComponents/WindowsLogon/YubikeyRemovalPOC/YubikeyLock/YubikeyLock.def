@@ -1,0 +1,4 @@
+LIBRARY YubikeyLock
+
+EXPORTS
+_MainFunc

@@ -1,0 +1,2 @@
+E:\MiToken\WindowsLogon\build\x64\Release\CacheUpdaterInstaller.msi
+E:\MiToken\WindowsLogon\build\x64\Release\CacheUpdaterInstaller.wixpdb

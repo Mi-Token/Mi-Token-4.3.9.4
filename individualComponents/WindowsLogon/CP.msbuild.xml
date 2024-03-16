@@ -1,0 +1,79 @@
+<Project DefaultTargets="BuildAll" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask TaskName="GetPropertiesFromPath" AssemblyFile="build\MiToken.Build.CustomTasks\bin\Debug\MiToken.Build.CustomTasks.dll" />
+  <UsingTask TaskName="RoboCopy"              AssemblyFile="build\MiToken.Build.CustomTasks\bin\Debug\MiToken.Build.CustomTasks.dll" />
+  <UsingTask TaskName="DevEnv"                AssemblyFile="build\MiToken.Build.CustomTasks\bin\Debug\MiToken.Build.CustomTasks.dll" />
+  <UsingTask TaskName="HelpAndManual"         AssemblyFile="build\MiToken.Build.CustomTasks\bin\Debug\MiToken.Build.CustomTasks.dll" />
+  <UsingTask TaskName="SignTool"              AssemblyFile="build\MiToken.Build.CustomTasks\bin\Debug\MiToken.Build.CustomTasks.dll" />
+  
+  <PropertyGroup Condition=" '$(MiToken_Output_Directory)' == '' ">
+    <MiToken_Output_Directory>c:\mitoken_builds\latest\</MiToken_Output_Directory>
+  </PropertyGroup>
+  
+    <PropertyGroup>
+      <VS11>$(Registry:HKEY_CLASSES_ROOT\VisualStudio.DTE.11.0\CLSID)</VS11>
+  </PropertyGroup>
+
+  
+  <PropertyGroup>
+     <Build_Targets>
+	 <!--
+         CleanOutput;
+		 -->
+         BuildCredentialProvider;
+     </Build_Targets>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(MiToken_Output_Bitness)' == '64' ">
+    <MiToken_Build_Platform>x64</MiToken_Build_Platform>
+    <MiToken_Build_Platform_Setup>x64</MiToken_Build_Platform_Setup>
+  </PropertyGroup>
+  
+  
+    <Target Name="BuildAll" DependsOnTargets="$(Build_Targets)" />
+
+  <!--
+  <Target Name="CleanOutput">
+     <RemoveDir Directories="$(MiToken_Output_Directory)$(MiToken_Build_Platform_Setup)" />
+	<ItemGroup>
+       <FilesToDelete Include="build\release\**\*;setup\build\release\**\*;reporting\bin\release\**\*" Exclude="build\release\keep.txt" />
+    </ItemGroup>
+    <Delete Files="@(FilesToDelete)" />
+  </Target>
+  -->
+  
+  
+  <Target Name="BuildCredentialProvider" Condition=" '$(MiToken_Output_Bitness)' == '64' AND '$(VS11)' != ''">
+
+		<MSBuild Projects="Gina\MiTokenGINA.sln"
+		 Properties="Configuration=Release;Platform=x64"
+		 Targets="Installer" RunEachTargetSeparately="true" BuildInParallel="false" ContinueOnError="false" />
+		 
+		 <MSBuild Projects="Gina\MiTokenGINA.sln"
+		 Properties="Configuration=Release;Platform=x86"
+		 Targets="Installer" RunEachTargetSeparately="true" BuildInParallel="false" ContinueOnError="false" />  
+
+		<MSBuild Projects="Gina\MiTokenGINA.sln"
+		 Properties="Configuration=Release;Platform=x64"
+		 Targets="InstallBootstrapper" RunEachTargetSeparately="true" BuildInParallel="false" ContinueOnError="false" />
+		 
+		 <MSBuild Projects="Gina\MiTokenGINA.sln"
+		 Properties="Configuration=Release;Platform=x86"
+		 Targets="InstallBootstrapper" RunEachTargetSeparately="true" BuildInParallel="false" ContinueOnError="false" />
+		
+		<MSBuild Projects="Gina\MiTokenGINA.sln"
+		 Properties="Configuration=Release;Platform=$(MiToken_Build_Platform)"
+		 Targets="MetaInstaller" RunEachTargetSeparately="true" BuildInParallel="false" ContinueOnError="false" />
+		 
+		 <MSBuild Projects="Gina\MiTokenGINA.sln"
+		 Properties="Configuration=Release;Platform=x64"
+		 Targets="CacheUpdaterInstallerClient" RunEachTargetSeparately="true" BuildInParallel="false" ContinueOnError="false" />
+		 
+		 <MSBuild Projects="Gina\MiTokenGINA.sln"
+		 Properties="Configuration=Release; Platform=x64"
+		 Targets="CacheUpdaterInstallerClientBootstrapper" RunEachTargetSeparately="true" BuildInParallel="false" ContinueOnError="false" />
+			
+  </Target>
+
+
+</Project>
+

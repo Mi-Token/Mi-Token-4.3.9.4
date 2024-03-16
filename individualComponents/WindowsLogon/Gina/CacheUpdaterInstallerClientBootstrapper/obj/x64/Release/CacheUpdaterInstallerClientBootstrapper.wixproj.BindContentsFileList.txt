@@ -1,0 +1,4 @@
+E:\MiToken\WindowsLogon\Gina\InstallBootstrapper\Resources\LogoSide.png
+E:\MiToken\WindowsLogon\build\x64\Release\CacheUpdaterInstaller.msi
+E:\MiToken\RADIUS\libs\DotNet-4.0\dotNetFx40_Full_setup.exe
+E:\MiToken\RADIUS\libs\vc_2010sp1_redist\Installer\vcredist_x64.exe

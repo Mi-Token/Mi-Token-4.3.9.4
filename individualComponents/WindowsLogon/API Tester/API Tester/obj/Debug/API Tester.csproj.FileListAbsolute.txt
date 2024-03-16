@@ -1,0 +1,10 @@
+D:\Mi-Token\Development\WindowsLogon\build\AnyCPU\Debug\API Tester.exe.config
+D:\Mi-Token\Development\WindowsLogon\build\AnyCPU\Debug\API Tester.exe
+D:\Mi-Token\Development\WindowsLogon\build\AnyCPU\Debug\API Tester.pdb
+D:\Mi-Token\Development\WindowsLogon\API Tester\API Tester\obj\Debug\API Tester.csprojAssemblyReference.cache
+D:\Mi-Token\Development\WindowsLogon\API Tester\API Tester\obj\Debug\API_Tester.Form1.resources
+D:\Mi-Token\Development\WindowsLogon\API Tester\API Tester\obj\Debug\API_Tester.Properties.Resources.resources
+D:\Mi-Token\Development\WindowsLogon\API Tester\API Tester\obj\Debug\API Tester.csproj.GenerateResource.cache
+D:\Mi-Token\Development\WindowsLogon\API Tester\API Tester\obj\Debug\API Tester.csproj.CoreCompileInputs.cache
+D:\Mi-Token\Development\WindowsLogon\API Tester\API Tester\obj\Debug\API Tester.exe
+D:\Mi-Token\Development\WindowsLogon\API Tester\API Tester\obj\Debug\API Tester.pdb

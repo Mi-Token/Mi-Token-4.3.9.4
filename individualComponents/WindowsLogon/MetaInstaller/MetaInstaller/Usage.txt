@@ -1,0 +1,15 @@
+PACKING Use:
+       [-i path] [-x86 path|NULL] [-x64 path|NULL] [-ac path|NULL] -o path
+               -i : The input file that will be appended to.
+                       If omitted the currently running one is used.
+               -x86 : The path to the MSI to run on 32 bit systems.
+                       If omitted the MSI that is currently bound is kept.
+                       Use DEL to remove the file.
+               -x64 : The path to the MSI to run on 64 bit systems.
+                       If omitted the MSI that is current bound is kept.
+                       Use DEL to remove the file.
+               -ac : The path to the AutoConfigFile to use.
+                       If omitted the currently bound AutoConfigFile is kept.
+                       Use DEL to remove the file.
+               -o : The path for the output file to be written to.
+                       NOTE : Cannot be the same file as -i.

@@ -1,0 +1,57 @@
+#pragma once
+
+#include "BLEDLLV2.h"
+
+BLEDLLV2_API IMiTokenBLE* WINAPI MiTokenBLE_CreateInterface();
+BLEDLLV2_API void WINAPI MiTokenBLE_DeleteInterface(IMiTokenBLE* instance);
+BLEDLLV2_API BLE_API_RET WINAPI MiTokenBLE_Initialize(IMiTokenBLE* instance, const char* COMPort, const char* NamedPipePort, bool isServer);
+BLEDLLV2_API bool WINAPI MiTokenBLE_ConnectedToCOM(IMiTokenBLE* instance);
+BLEDLLV2_API BLE_API_RET WINAPI MiTokenBLE_ReInitCOM(IMiTokenBLE* instance);
+BLEDLLV2_API bool WINAPI MiTokenBLE_COMOwnerKnown(IMiTokenBLE* instance);
+BLEDLLV2_API BLE_API_RET WINAPI MiTokenBLE_SetCOMWaitHandle(IMiTokenBLE* instance, void* waitHandle);
+BLEDLLV2_API BLE_API_RET WINAPI MiTokenBLE_WaitForCOMToBeFree(IMiTokenBLE* instance);
+BLEDLLV2_API BLE_API_NP_RETURNS WINAPI MiTokenBLE_ReleaseCOMPort(IMiTokenBLE* instance);
+BLEDLLV2_API void WINAPI MiTokenBLE_SetPollID(IMiTokenBLE* instance, int newPollID);
+BLEDLLV2_API int WINAPI MiTokenBLE_GetPollID(IMiTokenBLE* instance);
+BLEDLLV2_API int WINAPI MiTokenBLE_GetDeviceFoundCount(IMiTokenBLE* instance);
+BLEDLLV2_API BLE_API_RET WINAPI MiTokenBLE_GetDeviceInfo(IMiTokenBLE* instance, int deviceID, struct DeviceInfo* pDeviceInfo);
+BLEDLLV2_API BLE_API_RET WINAPI MiTokenBLE_GetDeviceMetaInfo(IMiTokenBLE* instance, int deviceID, int flag, uint8* buffer, int* bufferLength);
+BLEDLLV2_API BLE_API_RET WINAPI MiTokenBLE_RestartScanner(IMiTokenBLE* instance);
+BLEDLLV2_API FilteredSearchObject WINAPI MiTokenBLE_StartFilteredSearch(IMiTokenBLE* instance, int filterCount, DeviceData* filters);
+BLEDLLV2_API FilteredSearchObject WINAPI MiTokenBLE_StartFilteredSearchEx(IMiTokenBLE* instance, int filterCount, DeviceData* filters, int addressCount, uint8* addressArray);
+BLEDLLV2_API FilteredSearchObject WINAPI MiTokenBLE_StartFilteredSearchFromDLLExt(IMiTokenBLE* instance, FinalizedFilterObject* filterToUse);
+BLEDLLV2_API BLE_API_RET WINAPI MiTokenBLE_ConvertFilteredSearchToByteStream(IMiTokenBLE* instance, FilteredSearchObject filter, uint8* byteStream, int& byteStreamLength);
+BLEDLLV2_API FilteredSearchObject WINAPI MiTokenBLE_ConvertByteStreamToFilteredSearch(IMiTokenBLE* instance, uint8* byteStream, int byteStreamLength);
+BLEDLLV2_API BLE_API_RET WINAPI MiTokenBLE_ContinueFilteredSearch(IMiTokenBLE* instance, FilteredSearchObject filter, DeviceInfo* pDeviceInfo);
+BLEDLLV2_API void WINAPI MiTokenBLE_RestartFilteredSearch(IMiTokenBLE* instance, FilteredSearchObject filter);
+BLEDLLV2_API void WINAPI MiTokenBLE_FinishedFilteredSearch(IMiTokenBLE* instance, FilteredSearchObject filter);
+BLEDLLV2_API IMiTokenBLEConnection * WINAPI MiTokenBLE_StartProfile(IMiTokenBLE* instance, mac_address* address, REQUEST_ID* requestID);
+BLEDLLV2_API FilterObject* WINAPI MiTokenBLE_DLLExt_CreateNewFilter();
+BLEDLLV2_API FilterObject* WINAPI MiTokenBLE_DLLExt_AddFilter(FilterObject* filter, int flag, int len, unsigned char* data);
+BLEDLLV2_API void WINAPI MiTokenBLE_DLLExt_AddAddressFilter(FilterObject* filter, int addressCount, unsigned char* addresses);
+BLEDLLV2_API FinalizedFilterObject* WINAPI MiTokenBLE_DLLExt_FinalizeFilter(FilterObject* filter);
+BLEDLLV2_API BLE_API_NP_RETURNS WINAPI MiTokenBLE_Pipe_HasExclusiveAccess(IMiTokenBLE* instance);
+BLEDLLV2_API BLE_API_NP_RETURNS WINAPI MiTokenBLE_Pipe_ReleaseExclusiveAccess(IMiTokenBLE* instance);
+BLEDLLV2_API BLE_API_NP_RETURNS WINAPI MiTokenBLE_Pipe_RequestExclusiveAccess(IMiTokenBLE* instance);
+BLEDLLV2_API BLE_API_NP_RETURNS WINAPI MiTokenBLE_Pipe_SendMessage(IMiTokenBLE* instance, unsigned char* data, int length, int connectionID);
+BLEDLLV2_API BLE_API_NP_RETURNS WINAPI MiTokenBLE_Pipe_SetNamedPipeMessageCallback(IMiTokenBLE* instance, void(*callback) (IMiTokenBLE* sender, unsigned char* data, int length, int connectionID));
+BLEDLLV2_API BLE_CONN_RET WINAPI MiTokenBLE_CONN_Initialize(IMiTokenBLEConnection* instance, mac_address address);
+BLEDLLV2_API bool WINAPI MiTokenBLE_CONN_timedOut(IMiTokenBLEConnection* instance);
+BLEDLLV2_API void WINAPI MiTokenBLE_CONN_GetAddress(IMiTokenBLEConnection* instance, mac_address& address);
+BLEDLLV2_API BLE_CONN_RET WINAPI MiTokenBLE_CONN_IsConnected(IMiTokenBLEConnection* instance);
+BLEDLLV2_API BLE_CONN_RET WINAPI MiTokenBLE_CONN_ScanServicesInRange(IMiTokenBLEConnection* instance, SERVICE_HANDLE handle, uint16 maxRange);
+BLEDLLV2_API BLE_CONN_RET WINAPI MiTokenBLE_CONN_SetAttribute(IMiTokenBLEConnection* instance, ATTRIBUTE_HANDLE handle, uint8 length, const uint8* data);
+BLEDLLV2_API BLE_CONN_RET WINAPI MiTokenBLE_CONN_StartGetAttribute(IMiTokenBLEConnection* instance, ATTRIBUTE_HANDLE handle);
+BLEDLLV2_API BLE_CONN_RET WINAPI MiTokenBLE_CONN_GetAttribute(IMiTokenBLEConnection* instance, ATTRIBUTE_HANDLE handle, uint8 maxLength, uint8& realLength, uint8* buffer);
+BLEDLLV2_API BLE_CONN_RET WINAPI MiTokenBLE_CONN_Disconnect(IMiTokenBLEConnection* instance);
+BLEDLLV2_API BLE_CONN_RET WINAPI MiTokenBLE_CONN_PollRSSI(IMiTokenBLEConnection* instance);
+BLEDLLV2_API BLE_CONN_RET WINAPI MiTokenBLE_CONN_GetRSSI(IMiTokenBLEConnection* instance, int& rssi);
+BLEDLLV2_API BLE_CONN_RET WINAPI MiTokenBLE_CONN_ButtonPressedCallback(IMiTokenBLEConnection* instance, void(__stdcall *buttonPressed) (IMiTokenBLEConnection* requestID, int buttonID));
+BLEDLLV2_API BLE_CONN_RET WINAPI MiTokenBLE_CONN_ReadLong(IMiTokenBLEConnection* instance, ATTRIBUTE_HANDLE handle);
+BLEDLLV2_API MessageBufferObject WINAPI MiTokenBLE_CONN_CreateNewMessageBuffer(IMiTokenBLEConnection* instance);
+BLEDLLV2_API BLE_CONN_RET WINAPI MiTokenBLE_CONN_WriteMessageBuffer(IMiTokenBLEConnection* instance, MessageBufferObject messageBuffer);
+BLEDLLV2_API BLE_CONN_RET WINAPI MiTokenBLE_CONN_AddMessageToMessageBuffer(IMiTokenBLEConnection* instance, MessageBufferObject messageBuffer, ATTRIBUTE_HANDLE handle, uint16 length, const uint8* data);
+BLEDLLV2_API BLE_CONN_RET WINAPI MiTokenBLE_CONN_GetCharacteristicHandle(IMiTokenBLEConnection* instance, ATTRIBUTE_HANDLE handle, CHARACTERISTIC_HANDLE& characteristicHandle);
+BLEDLLV2_API int WINAPI MiTokenBLE_CONN_GetRequestID(IMiTokenBLEConnection* instance);
+BLEDLLV2_API uint8 WINAPI MiTokenBLE_CONN_GetLastError(IMiTokenBLEConnection* instance);
+BLEDLLV2_API BLE_CONN_RET WINAPI MiTokenBLE_CONN_TimeoutRequest(IMiTokenBLEConnection* instance);

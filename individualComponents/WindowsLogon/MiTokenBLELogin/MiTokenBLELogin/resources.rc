@@ -1,0 +1,8 @@
+#include "Resource.h"
+#include <winres.h>
+
+// Bitmaps:
+IDB_TILE_IMAGE      BITMAP      DISCARDABLE "tileimage.bmp" 
+IDB_BITMAP2			BITMAP		DISCARDABLE "my128.bmp"
+END
+

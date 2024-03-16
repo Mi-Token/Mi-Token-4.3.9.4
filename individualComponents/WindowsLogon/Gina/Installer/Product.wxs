@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <?define UpgradeCode="{7B55F999-AB35-46c0-BD98-05B072B25E16}"?>
+
+  <!-- Just copying and pasting from: mitoken-central\RADIUS\setup\includes\Platforms.wxs -->
+  <!-- Latest Version has proper pre processor options-->
+  <?define ProductVersion=!(bind.FileVersion.CP32DLL)?>
+  <?define ProductName="Mi-Token Credential Provider"?>
+  <?define CRTarch = "x86_x64" ?>
+  <?if $(var.Platform) = "x86" ?>
+    <?define Win64 = "no" ?>
+    <?define ProgramFilesFolder = "ProgramFilesFolder" ?>
+  <?else?>
+    <?define Win64 = "yes" ?>
+    <?define ProgramFilesFolder = "ProgramFiles64Folder" ?>
+  <?endif?>
+  <?define BuildBase = "no" ?>
+
+  <?define API = "yes" ?>
+<!--
+  <Fragment>
+    <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Microsoft\Net Framework Setup\NDP\v4\Full" Value="Install" Variable="Netfx4FullVersion" Win64="no" />
+    <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Microsoft\Net Framework Setup\NDP\v4\Full" Value="Install" Variable="Netfx4x64FullVersion" Win64="yes" />
+    <util:FileSearch Path="[WindowsFolder]Sysnative\msvcp100.dll" Variable="VCRedistFile1" Result="exists" />
+    <util:FileSearch Path="[WindowsFolder]Sysnative\msvcr100.dll" Variable="VCRedistFile2" Result="exists" />
+    <PackageGroup Id="DotNetAndVCRedist">
+      <ExePackage Id="DotNet4FullExe"
+                  InstallCommand="/q /norestart /ChainingPackage &quot;[WixBundleName]&quot; "
+                  RepairCommand="/q /norestart /repair /ChainingPackage &quot;[WixBundleName]&quot; "
+                  UninstallCommand="/uninstall /q /norestart /ChainingPackage &quot;[WixBundleName]&quot; "
+                  PerMachine="yes"
+                  DetectCondition="(Netfx4FullVersion = 1) OR (Netfx4x64FullVersion = 1)"
+                  InstallCondition="(Netfx4FullVersion &lt;&gt; 1) AND (Netfx4x64FullVersion &lt;&gt; 1)"
+                  Vital="yes"
+                  Permanent="yes"
+                  Compressed="yes"
+                  Name="Microsoft .NET 4.0 Framework Web Install"
+                  SourceFile="..\..\..\libs\DotNet-4.0\dotNetFx40_Full_setup.exe">
+      </ExePackage>
+      <ExePackage Id="VC2010SP1Redist"
+                  InstallCommand="/q /norestart /ChainingPackage &quot;[WixBundleName]&quot; "
+                  RepairCommand="/q /norestart /repair /ChainingPackage &quot;[WixBundleName]&quot; "
+                  UninstallCommand="/uninstall /q /norestart /ChainingPackage &quot;[WixBundleName]&quot; "
+                  PerMachine="yes"
+                  DetectCondition="VCRedistFile1 AND VCRedistFile2"
+                  InstallCondition="(NOT VCRedistFile1) OR (NOT VCRedistFile2)"
+                  Vital="yes"
+                  Permanent="yes"
+                  Compressed="yes"
+                  Name="Microsoft Visual C++ 2010 SP1 Redistributable Package (x64)"
+                  SourceFile="..\..\..\libs\vc_2010sp1_redist\Installer\vcredist_x64.exe">
+      </ExePackage>
+    </PackageGroup>
+
+  </Fragment>
+  -->
+  <Product Id="*" Name="Mi-Token Desktop Login" Manufacturer="Mi-Token Inc." Language="1033" Version="$(var.ProductVersion)" UpgradeCode="$(var.UpgradeCode)" >
+     <Package Description="Mi-Token Desktop Login" Comments="(C) 2010-2014 Mi-Token Unit Trust" InstallerVersion="200" Compressed="yes" InstallPrivileges="elevated" InstallScope="perMachine" />
+
+
+    
+    <!-- 
+    Do NOT define this here, otherwise the Bootstrapper cannot override this value.
+    <Property Id="USEAC" Secure="yes" Value="0"/>
+    -->
+    <!-- We require .NET 2.0 or newer to run the config utility. -->
+    <PropertyRef Id="NETFRAMEWORK40FULL"/>
+    <Condition Message="This product requires .NET Framework 4.0. Please install.">
+      <![CDATA[Installed OR NETFRAMEWORK40FULL]]>
+    </Condition>
+
+    <!-- If we are building for 32 bit, but running on a 64bit machine warn the user -->
+    <?if $(var.Win64) = "no"?> 
+      <Condition Message="You are attempting to run the 32-bit installer on a 64-bit system">
+        <![CDATA[NOT Msix64]]>
+      </Condition>
+    <?endif?>
+    
+    
+    <Media Id="1" Cabinet="Installer.cab" EmbedCab="yes" />
+
+    <UIRef Id="WixUI_ErrorProgressText" />
+    <!--
+    <UIRef Id="WixUI_Minimal"/>
+    -->
+    
+
+    <!-- Just copying and pasting from: mitoken-central\RADIUS\setup\includes\UI.wxs -->
+    <WixVariable Id='WixUIBannerBmp' Value='../../../RADIUS/setup/Banner_top.bmp' />
+    <WixVariable Id='WixUIDialogBmp' Value='../../../RADIUS/setup/Banner_left.bmp' />
+    <Icon Id='mitoken.icon.exe' SourceFile='../../../RADIUS/setup/mitoken.icon.exe' />
+    <Property Id="RADIUSSETUP">
+      <RegistrySearch Id="ServerLook"
+                      Root="HKLM"
+                      Key="Software\Mi-token\Logon"
+                      Name="Server_Name_1"
+                      Win64="$(var.Win64)"
+                      Type="raw" />
+    </Property>
+    <!--
+    <Property Id="GINAINSTALLED">
+      <RegistrySearch Name="GinaDLL"
+                      Id="GinaLook"
+                      Root="HKLM"
+                      Key="Software\Microsoft\Windows NT\CurrentVersion\winlogon"
+                      Win64="$(var.Win64)"
+                      Type="raw" />
+    </Property>
+    -->
+    
+    <Property Id="ARPPRODUCTICON" Value="mitoken.icon.exe" />
+    
+    <!--
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+    -->
+
+    
+
+
+    <!-- <Condition Message="You should first configure the Mi-Token server settings">RADIUSSETUP</Condition>-->
+    <Condition Message="A later version of the Mi-Token Desktop Login is already installed">NOT NEWERVERSIONDETECTED</Condition>
+
+    <!-- New Check to make sure this machine is Vista or later -->
+    <Condition Message="This application only runs on Windows Vista, Windows 7, Windows 8, Windows Server 2008R2, Windows Server 2012 and Windows 10">
+      (NOT VersionNT = 500 AND NOT VersionNT = 501 AND NOT VersionNT = 502)
+    </Condition>
+
+
+    
+    
+    
+    
+    <Directory Id="TARGETDIR" Name="SourceDir">
+     <Directory Id="WINDOWSVOLUME">
+      <Directory Id='$(var.ProgramFilesFolder)' Name='Program Files'>
+
+        <Directory Id="CompanyFolder" Name="Mi-Token">
+        
+          <Directory Id="INSTALLLOCATION" Name="Mi-Token Desktop Login" FileSource="$(var.BinariesDir)">
+
+              <Component Id='ConfigurationToolComponent'   Guid='47D68C19-A4B7-4bc5-A5CD-235338EF05F4' Win64="$(var.Win64)">
+                <?if $(var.API) = "no"?>
+                <File Id='RadiusDll' Name='radius-net.dll' DiskId='1' Vital='yes' />
+                <File Id='Log4NetDll' Name='log4net.dll' DiskId='1' Vital='yes' />
+                <File Id='MiTokenExceptionBoxDll' Name='MiToken.ExceptionMessageBox.dll' DiskId='1' Vital='yes' />
+                <File Id='MITOKENEXE' Name='Mi-TokenWindowsLogon.exe' DiskId='1' Vital='yes' />
+                <?else ?>
+                <File Id='MITOKENEXE' Name='API Setup.exe' DiskId='1' Vital='yes' />
+                <File Id='APITESTEREXE' Name='API Tester.exe' DiskId='1' Vital='yes' />
+                <?endif ?>
+                <RegistryKey Id='RadiusSetUp' Action='createAndRemoveOnUninstall' Root='HKLM' Key='SOFTWARE\Mi-Token\Logon'>
+                  <PermissionEx Id="RegistryPermission" Sddl="D:P(A;OICI;GA;;;SY)(A;OICI;GA;;;BA)" />
+                </RegistryKey>
+
+              </Component>
+
+
+              <!--Credential Provider Component-->
+              <?if $(var.Win64) = "yes" ?>
+              <Component Id='CredProvider' Guid='BDEE2FD0-3832-43de-AA7C-6E80463AA0E4' Win64="yes">
+                <CreateFolder>
+                  <PermissionEx Sddl="D:P(A;OICI;GA;;;SY)(A;OICI;GA;;;BA)" />
+                </CreateFolder>
+
+
+
+                <File Id='CP32DLL' Name='MiTokenCredProviderX64.dll' DiskId='1' Vital='yes'>
+                  <CopyFile Id='CopyCP' DestinationDirectory='System64Folder' DestinationName='MiTokenCredProvider.dll'/>
+                </File>
+
+                <RegistryKey Id ='Credprovider' Action='createAndRemoveOnUninstall' Root='HKLM' Key='SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\Credential Providers\{FFFD3EB9-2E00-44BC-8EC0-221A984E42B6}'>
+                  <RegistryValue Type='string' Value='MiTokenCredProvider'/>
+                </RegistryKey>
+
+                <RegistryKey Id ='Credproviderdfilter' Action='createAndRemoveOnUninstall' Root='HKLM' Key='SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\Credential Provider Filters\{FFFD3EB9-2E00-44BC-8EC0-221A984E42B6}'>
+                  <RegistryValue Type='string' Value='MiTokenCredProvider'/>
+                </RegistryKey>
+
+                <RegistryKey Id ='Credproviderdllsetup' Action='createAndRemoveOnUninstall' Root='HKCR' Key='CLSID\{FFFD3EB9-2E00-44BC-8EC0-221A984E42B6}'>
+
+                  <RegistryValue Type='string'  Value='MiTokenCredProvider'/>
+
+                  <RegistryKey Id='Credproverdllregister' Action='createAndRemoveOnUninstall'  Key='InprocServer32'>
+
+                    <RegistryValue Type ='string'  Value='MiTokenCredProvider.dll'/>
+                    <RegistryValue Type='string' Name='ThreadingModel' Value='Apartment'/>
+
+                  </RegistryKey>
+
+                </RegistryKey>
+
+              </Component>
+
+              <?else ?>
+              <Component Id='CredProvider' Guid='BDEE2FD0-3832-43de-AA7C-6E80463AA0E4' Win64="no">
+                <CreateFolder>
+                  <PermissionEx Sddl="D:P(A;OICI;GA;;;SY)(A;OICI;GA;;;BA)" />
+                </CreateFolder>
+
+                
+                <File Id='CP32DLL' Name='MiTokenCredProviderX86.dll' DiskId='1' Vital='yes'>
+                  <CopyFile Id='CopyCP' DestinationDirectory='SystemFolder' DestinationName='MiTokenCredProvider.dll'/>
+                </File>
+                
+                <RegistryKey Id ='Credprovider' Action='createAndRemoveOnUninstall' Root='HKLM' Key='SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\Credential Providers\{FFFD3EB9-2E00-44BC-8EC0-221A984E42B6}'>
+                  <RegistryValue Type='string' Value='MiTokenCredProvider'/>
+                </RegistryKey>
+
+                <RegistryKey Id ='Credproviderdfilter' Action='createAndRemoveOnUninstall' Root='HKLM' Key='SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\Credential Provider Filters\{FFFD3EB9-2E00-44BC-8EC0-221A984E42B6}'>
+                  <RegistryValue Type='string' Value='MiTokenCredProvider'/>
+                </RegistryKey>
+
+                <RegistryKey Id ='Credproviderdllsetup' Action='createAndRemoveOnUninstall' Root='HKCR' Key='CLSID\{FFFD3EB9-2E00-44BC-8EC0-221A984E42B6}'>
+
+                  <RegistryValue Type='string'  Value='MiTokenCredProvider'/>
+
+                  <RegistryKey Id='Credproverdllregister' Action='createAndRemoveOnUninstall'  Key='InprocServer32'>
+
+                    <RegistryValue Type ='string'  Value='MiTokenCredProvider.dll'/>
+                    <RegistryValue Type='string' Name='ThreadingModel' Value='Apartment'/>
+
+                  </RegistryKey>
+
+                </RegistryKey>
+
+              </Component>
+
+              <?endif?>
+
+
+
+
+            </Directory>
+        </Directory>
+
+      </Directory>
+
+        <?if $(var.Platform) = "x64" ?>
+          <Directory Id='System64Folder'>
+            <Component Id='OpenSSL' Guid='*'>
+              <File Source='..\..\..\RADIUS\libs\openssl-1.0.2h\bin\libeay32.dll' KeyPath='yes' />
+            </Component>
+            <Component Id='OpenSSL2' Guid='*'>
+              <File Source='..\..\..\RADIUS\libs\openssl-1.0.2h\bin\ssleay32.dll' KeyPath='yes' />
+            </Component>
+          </Directory>
+        <?else?>
+          <Directory Id='SystemFolder'>
+            <Component Id='OpenSSL' Guid='*'>
+              <File Source='..\..\..\RADIUS\libs\openssl-1.0.2h\32-bit\bin\libeay32.dll' KeyPath='yes' />
+            </Component>
+            <Component Id='OpenSSL2' Guid='*'>
+              <File Source='..\..\..\RADIUS\libs\openssl-1.0.2h\32-bit\bin\ssleay32.dll' KeyPath='yes' />
+            </Component>
+          </Directory>
+        <?endif?>
+       
+     </Directory>
+    </Directory>
+    <SetDirectory Id="WINDOWSVOLUME" Value="[WindowsVolume]"/>
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
+    <!--
+    <UIRef Id="WixUI_InstallDir" />
+    -->
+
+    <!--
+    <Feature Id="ProductFeatureGina" Title="Mi-Token GINA extension" Level="1">
+
+      <ComponentRef Id="GINAComponent" />
+      <?if $(var.Win64) = "yes" ?>
+      <Condition Level='0' >
+        (NOT VersionNT = 500 AND NOT VersionNT = 501 AND NOT VersionNT = 502)  OR NOT VersionNT64
+      </Condition>
+      <?else?>
+      <Condition Level='0' >
+        (NOT VersionNT = 500 AND NOT VersionNT = 501 AND NOT VersionNT = 502)  OR VersionNT64
+      </Condition>
+      <?endif?>
+    </Feature>
+    -->
+    
+    <Feature Id="ProductFeatureCredProvider" Title="Mi-Token Credential Provider extension" Level="1">
+
+      <ComponentRef Id="CredProvider" />
+      <?if $(var.Win64) = "yes" ?>
+      <Condition  Level='0'>
+        (VersionNT &lt; 600) OR NOT VersionNT64
+      </Condition>
+      <?else?>
+      <Condition  Level='0'>
+        (VersionNT &lt; 600) OR VersionNT64
+      </Condition>
+      <?endif?>
+
+
+    </Feature>
+
+    <Feature Id='ConfigComponent' Title='Desktop Login Configuration Tool' Level='1'>
+
+      <ComponentRef Id="ConfigurationToolComponent"/>
+
+    </Feature>
+
+    <Feature Id='FeatureSSL' Title='Open SSL' Level='1'>
+      <ComponentRef Id="OpenSSL"/>
+      <ComponentRef Id="OpenSSL2"/>
+    </Feature>
+
+    <!--
+    <Binary Id="MyCA" SourceFile="GINARegistry.vbs"/>
+
+    <CustomAction Id="DeRegisterGina"
+              BinaryKey="MyCA"
+              VBScriptCall="Unregister"
+              Execute="deferred"
+              Return="check"
+              HideTarget="no"
+              Impersonate="no" />
+
+    -->
+    
+    <CustomAction Id='RunConfigTool'  ExeCommand='-"[INSTALLLOCATION]"' 
+               FileKey="MITOKENEXE" Impersonate="no" Execute='deferred'  Return='check' />
+    <Upgrade Id="$(var.UpgradeCode)">
+      <UpgradeVersion Minimum="$(var.ProductVersion)" IncludeMinimum="no" OnlyDetect="yes" Property="NEWERVERSIONDETECTED"/>
+
+      <?ifdef Debug ?>
+      <UpgradeVersion Minimum="0.0.0" IncludeMinimum="yes" Maximum="$(var.ProductVersion)" IncludeMaximum="yes" Property="OLDERVERSIONBEINGUPGRADED"/>
+      <?else ?>
+      <UpgradeVersion Minimum="0.0.0" IncludeMinimum="yes" Maximum="$(var.ProductVersion)" IncludeMaximum="yes" Property="OLDERVERSIONBEINGUPGRADED"/>
+      <?endif ?>
+
+    </Upgrade>
+
+    <InstallExecuteSequence>
+
+      <RemoveExistingProducts After="InstallInitialize" />
+      <!--
+      <Custom Action="DeRegisterGina" After="InstallInitialize">GINAINSTALLED AND REMOVE</Custom>
+      -->
+      <Custom Action="RunConfigTool"  Before="InstallFinalize">NOT RADIUSSETUP AND NOT REMOVE AND (USEAC="0")</Custom>
+
+    </InstallExecuteSequence>
+
+  </Product>
+
+
+</Wix>

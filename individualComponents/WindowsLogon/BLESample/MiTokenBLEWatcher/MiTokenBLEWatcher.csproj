@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B7CFC988-C063-417D-8B90-F445B29E3EA1}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MiTokenBLEWatcher</RootNamespace>
+    <AssemblyName>MiTokenBLEWatcher</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\RADIUS\API\CSharpAPI\CSharpAPI\MiToken API.cs">
+      <Link>MiToken API.cs</Link>
+    </Compile>
+    <Compile Include="..\BLEWatcherCSTest\WatcherCode.cs">
+      <Link>WatcherCode.cs</Link>
+    </Compile>
+    <Compile Include="..\BLEWatcherStateMachine\ByteBuilder.cs">
+      <Link>ByteBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\BLEWatcherStateMachine\StateMachine\EventOverrides.cs">
+      <Link>EventOverrides.cs</Link>
+    </Compile>
+    <Compile Include="..\BLEWatcherStateMachine\StateMachine\PasswordHandler.cs">
+      <Link>PasswordHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\BLEWatcherStateMachine\StateMachine\StateMachine.cs">
+      <Link>StateMachine.cs</Link>
+    </Compile>
+    <Compile Include="..\BLEWatcherStateMachine\StateMachine\States\AuthenticateToken.cs">
+      <Link>AuthenticateToken.cs</Link>
+    </Compile>
+    <Compile Include="..\BLEWatcherStateMachine\StateMachine\States\CheckingForUserPassDB.cs">
+      <Link>CheckingForUserPassDB.cs</Link>
+    </Compile>
+    <Compile Include="..\BLEWatcherStateMachine\StateMachine\States\InitializeState.cs">
+      <Link>InitializeState.cs</Link>
+    </Compile>
+    <Compile Include="..\BLEWatcherStateMachine\StateMachine\States\LookingForToken.cs">
+      <Link>LookingForToken.cs</Link>
+    </Compile>
+    <Compile Include="..\BLEWatcherStateMachine\StateMachine\States\WaitingForCPResponse.cs">
+      <Link>WaitingForCPResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\BLEWatcherStateMachine\StateMachine\States\WaitingForWakeup.cs">
+      <Link>WaitingForWakeup.cs</Link>
+    </Compile>
+    <Compile Include="..\BLEWatcherStateMachine\StateMachine\States\WatchingToken.cs">
+      <Link>WatchingToken.cs</Link>
+    </Compile>
+    <Compile Include="MiTokenBLEUUID.cs" />
+    <Compile Include="PingBurstCfg.cs" />
+    <Compile Include="ProjectInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProjectInstaller.Designer.cs">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Service1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Service1.Designer.cs">
+      <DependentUpon>Service1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ProjectInstaller.resx">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLE_API\BLE_API.csproj">
+      <Project>{19bd8b13-d382-4611-935d-c325cce429f1}</Project>
+      <Name>BLE_API</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>mkdir "$(ProjectDir)..\..\build\$(PlatformName)\$(ConfigurationName)"
+copy $(TargetPath) $(ProjectDir)..\..\build\$(PlatformName)\$(ConfigurationName)\$(TargetName).exe"
+REM The below is only for as long as we expect the exe to be called BLEWatcher.exe
+copy $(TargetPath) $(ProjectDir)..\..\build\$(PlatformName)\$(ConfigurationName)\BLEWatcher.exe"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

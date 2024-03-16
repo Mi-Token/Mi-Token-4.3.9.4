@@ -1,0 +1,9 @@
+LIBRARY MiTokenAP
+
+EXPORTS
+	DLL_FunctionTable
+	SpLsaModeInitialize
+	SpUserModeInitialize
+	SpAcceptCredentials
+	SpInitialize
+	LsaApInitializePackage

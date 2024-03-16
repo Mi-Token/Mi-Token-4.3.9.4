@@ -1,0 +1,4 @@
+LIBRARY DebugCAP
+
+EXPORTS
+	DLL_FunctionTable @1

@@ -1,0 +1,5 @@
+..\..\build\x64\Release\API Tester.exe
+..\..\build\x64\Release\MiTokenCredProviderX64.dll
+..\..\..\RADIUS\libs\openssl-1.0.2h\bin\libeay32.dll
+..\..\build\x64\Release\API Setup.exe
+..\..\..\RADIUS\libs\openssl-1.0.2h\bin\ssleay32.dll

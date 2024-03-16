@@ -1,0 +1,18 @@
+E:\MiToken\WindowsLogon\build\x86\Release\API setup.exe.config
+E:\MiToken\WindowsLogon\build\x86\Release\API setup.exe
+E:\MiToken\WindowsLogon\build\x86\Release\API setup.pdb
+E:\MiToken\WindowsLogon\Gina\API setup\obj\x86\Release\API_setup.Resource1.resources
+E:\MiToken\WindowsLogon\Gina\API setup\obj\x86\Release\API_Autoconfig.ConfigControl.resources
+E:\MiToken\WindowsLogon\Gina\API setup\obj\x86\Release\API_setup.add_bypass.resources
+E:\MiToken\WindowsLogon\Gina\API setup\obj\x86\Release\API_setup.AddServer.resources
+E:\MiToken\WindowsLogon\Gina\API setup\obj\x86\Release\API_setup.BypassEnabledTimes.resources
+E:\MiToken\WindowsLogon\Gina\API setup\obj\x86\Release\API_setup.BypassTable.resources
+E:\MiToken\WindowsLogon\Gina\API setup\obj\x86\Release\API_setup.BypassTimeConfig.resources
+E:\MiToken\WindowsLogon\Gina\API setup\obj\x86\Release\API_setup.Form2.resources
+E:\MiToken\WindowsLogon\Gina\API setup\obj\x86\Release\API_setup.Properties.Resources.resources
+E:\MiToken\WindowsLogon\Gina\API setup\obj\x86\Release\API_setup.remove_bypass.resources
+E:\MiToken\WindowsLogon\Gina\API setup\obj\x86\Release\API_setup.Security_options.resources
+E:\MiToken\WindowsLogon\Gina\API setup\obj\x86\Release\API_setup.tester.resources
+E:\MiToken\WindowsLogon\Gina\API setup\obj\x86\Release\API setup.csproj.GenerateResource.Cache
+E:\MiToken\WindowsLogon\Gina\API setup\obj\x86\Release\API setup.exe
+E:\MiToken\WindowsLogon\Gina\API setup\obj\x86\Release\API setup.pdb

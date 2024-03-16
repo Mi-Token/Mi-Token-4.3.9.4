@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>MiTokenBLELoginAsync</ProjectName>
+    <ProjectGuid>{9F412662-E433-4F5B-9DC6-97844A0E73A0}</ProjectGuid>
+    <RootNamespace>SampleCredentialProvider</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>NotSet</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>NotSet</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../build/$(PlatformTarget)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(PlatformTarget)\$(Configuration)\</IntDir>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../build/$(Platform)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../build/$(PlatformTarget)/$(Configuration)/</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(PlatformTarget)/$(Configuration)/</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../build/$(Platform)/$(Configuration)/</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)/$(Configuration)/</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>..\..\freeradius-client\include;C:\Program Files\Microsoft SDKs\Windows\v6.0a\Include;..\..\..\RADIUS\MiTokenOTPLib\;..\..\Gina\OTPCheck;..\..\BLESample\BLELibV2;..\..\Gina\MiTokenAPICpp;..\..\BLESample\BLELibV2_1_TesterCore;$(ProjectDir)..\..\BLESample\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <BrowseInformation>
+      </BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>FreeRadius.lib;secur32.lib;winhttp.lib;OTPCheck.lib;BLELibV2.lib;CPTokenClass.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ShowProgress>LinkVerboseLib</ShowProgress>
+      <OutputFile>$(OutDir)$(ProjectName).dll</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\RADIUS\MiTokenOTPLib\build\$(Configuration)\$(Platform);..\..\..\RADIUS\build\$(Configuration)\$(Platform);..\..\build\$(PlatformTarget)\$(Configuration);..\..\Gina\MiTokenAPICpp\$(PlatformTarget)\$(Configuration);..\..\Gina\$(PlatformTarget)\$(Configuration);.\..\Gina\OTPCheck\$(PlatformTarget)\$(Configuration);..\..\OpenSSL\$(PlatformTarget)\lib\;..\..\BLESample\$(PlatformTarget)\$(Configuration)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>MiTokenCredProvider.def</ModuleDefinitionFile>
+      <AddModuleNamesToAssembly>secur32.lib;%(AddModuleNamesToAssembly)</AddModuleNamesToAssembly>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>false</GenerateMapFile>
+      <MapExports>false</MapExports>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>..\..\freeradius-client\include;C:\Program Files\Microsoft SDKs\Windows\v6.0a\Include;..\..\..\RADIUS\MiTokenOTPLib\;..\..\Gina\OTPCheck;..\..\BLESample\BLELibV2;..\..\Gina\MiTokenAPICpp;..\..\BLESample\BLELibV2_1_TesterCore;$(ProjectDir)..\..\BLESample\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <BrowseInformation>true</BrowseInformation>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>FreeRadius.lib;secur32.lib;winhttp.lib;OTPCheck.lib;BLELibV2.lib;CPTokenClass.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ShowProgress>LinkVerboseLib</ShowProgress>
+      <OutputFile>$(OutDir)$(ProjectName).dll</OutputFile>
+      <AdditionalLibraryDirectories>../../build/$(PlatformTarget)/$(Configuration);$(ProjectDir)../../Gina/MiTokenAPICpp/$(PlatformTarget)/$(Configuration);../../../RADIUS/MiTokenOTPLib/build/$(Configuration)/$(Platform);../../../RADIUS/build/$(Configuration)/$(Platform);../../Gina/$(PlatformTarget)/$(Configuration);../../OpenSSL/$(PlatformTarget)/lib/;$(ProjectDir)../../Gina/OTPCheck/$(PlatformTarget)/$(Configuration);$(ProjectDir)../../BLESample/$(PlatformTarget)/$(Configuration)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>MiTokenCredProvider.def</ModuleDefinitionFile>
+      <AddModuleNamesToAssembly>secur32.lib;%(AddModuleNamesToAssembly)</AddModuleNamesToAssembly>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>false</GenerateMapFile>
+      <MapExports>false</MapExports>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <Bscmake>
+      <PreserveSBR>true</PreserveSBR>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\freeradius-client\include;C:\Program Files\Microsoft SDKs\Windows\v6.0a\Include;..\..\..\RADIUS\MiTokenOTPLib\;..\..\Gina\OTPCheck;..\..\BLESample\BLELibV2;..\..\Gina\MiTokenAPICpp;..\..\BLESample\BLELibV2_1_TesterCore;$(ProjectDir)..\..\BLESample\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_USRDLL;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>FreeRadius.lib;secur32.lib;winhttp.lib;OTPCheck.lib;BLELibV2.lib;CPTokenClass.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ShowProgress>LinkVerboseLib</ShowProgress>
+      <OutputFile>$(OutDir)$(ProjectName).dll</OutputFile>
+      <AdditionalLibraryDirectories>..\..\build\$(PlatformTarget)\$(Configuration);..\..\..\RADIUS\MiTokenOTPLib\build\$(Configuration)\$(PlatformTarget);..\..\..\RADIUS\build\$(Configuration)\$(PlatformTarget);..\..\Gina\MiTokenAPICpp\$(PlatformTarget)\$(Configuration)\;..\..\Gina\$(PlatformTarget)\$(Configuration)\;..\..\Gina\OTPCheck\$(PlatformTarget)\$(Configuration);..\..\OpenSSL\$(PlatformTarget)\lib\;..\..\BLESample\Lib\$(PlatformTarget)\$(Configuration)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>MiTokenCredProvider.def</ModuleDefinitionFile>
+      <AddModuleNamesToAssembly>secur32.lib;%(AddModuleNamesToAssembly)</AddModuleNamesToAssembly>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+    </Link>
+    <PreBuildEvent>
+      <Command>echo $(ProjectDir)../../BLESample/$(Platform)/$(Configuration)
+echo Looking for MiTokenAPICpp in $(ProjectDir)../../Gina/MiTokenAPICpp\$(Platform)\$(Configuration)\</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>mkdir $(SolutionDir)..\..\build\x86\Release
+Copy $(TargetDir)$(TargetFileName) $(SolutionDir)..\..\build\x86\Release\MiTokenCredProviderBLEX86.dll</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PreBuildEvent>
+      <Command>echo $(ProjectDir)../../BLESample/$(Platform)/$(Configuration)
+echo Looking for MiTokenAPICpp in $(ProjectDir)../../Gina/MiTokenAPICpp\$(Platform)\$(Configuration)\</Command>
+    </PreBuildEvent>
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\freeradius-client\include;C:\Program Files\Microsoft SDKs\Windows\v6.0a\Include;..\..\..\RADIUS\MiTokenOTPLib\;..\..\Gina\OTPCheck;..\..\BLESample\BLELibV2;..\..\Gina\MiTokenAPICpp;..\..\BLESample\BLELibV2_1_TesterCore;$(ProjectDir)..\..\BLESample\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDOWS;_USRDLL;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>FreeRadius.lib;secur32.lib;winhttp.lib;OTPCheck.lib;BLELibV2.lib;CPTokenClass.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ShowProgress>LinkVerbose</ShowProgress>
+      <OutputFile>$(OutDir)$(ProjectName).dll</OutputFile>
+      <AdditionalLibraryDirectories>..\..\build\$(Platform)\$(Configuration);..\..\..\RADIUS\MiTokenOTPLib\build\$(Configuration)\$(Platform);..\..\..\RADIUS\build\$(Configuration)\$(Platform);..\..\Gina\MiTokenAPICpp\$(PlatformTarget)\$(Configuration);..\..\Gina\$(PlatformTarget)\$(Configuration);..\..\Gina\OTPCheck\$(PlatformTarget)\$(Configuration);..\..\OpenSSL\$(PlatformTarget)\lib;..\..\BLESample\$(PlatformTarget)\$(Configuration)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>MiTokenCredProvider.def</ModuleDefinitionFile>
+      <AddModuleNamesToAssembly>%(AddModuleNamesToAssembly)</AddModuleNamesToAssembly>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>copy $(TargetDir)$(TargetFileName) $(TargetDir)MiTokenCredProviderBLEX64.dll</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\BLESample\BLELibV2_1_TesterCore\LibTesterHelperFuncs.cpp" />
+    <ClCompile Include="Credential.cpp" />
+    <ClCompile Include="CredentialFilter.cpp" />
+    <ClCompile Include="Dll.cpp" />
+    <ClCompile Include="guid.cpp" />
+    <ClCompile Include="helpers.cpp" />
+    <ClCompile Include="..\..\..\RADIUS\MiTokenOTPLib\hmac.c" />
+    <ClCompile Include="..\..\..\RADIUS\MiTokenOTPLib\oath.c" />
+    <ClCompile Include="Provider.cpp" />
+    <ClCompile Include="..\..\..\RADIUS\MiTokenOTPLib\sha1.c" />
+    <ClCompile Include="..\..\..\RADIUS\MiTokenOTPLib\sha224-256.c" />
+    <ClCompile Include="..\..\..\RADIUS\MiTokenOTPLib\sha384-512.c" />
+    <ClCompile Include="..\..\..\RADIUS\MiTokenOTPLib\usha.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\BLESample\BLELibV2_1_TesterCore\LibTesterHelperFuncs.h" />
+    <ClInclude Include="common.h" />
+    <ClInclude Include="Credential.h" />
+    <ClInclude Include="CredentialFilter.h" />
+    <ClInclude Include="Dll.h" />
+    <ClInclude Include="guid.h" />
+    <ClInclude Include="helpers.h" />
+    <ClInclude Include="..\..\..\RADIUS\MiTokenOTPLib\oath.h" />
+    <ClInclude Include="Provider.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="..\..\..\RADIUS\MiTokenOTPLib\sha-private.h" />
+    <ClInclude Include="..\..\..\RADIUS\MiTokenOTPLib\sha.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MiTokenCredProvider.def" />
+    <None Include="my128.bmp" />
+    <None Include="..\Reg_MiTokenCredProv.reg" />
+    <None Include="..\Unreg_MiTokenCredProv.reg" />
+    <None Include="readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resources.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

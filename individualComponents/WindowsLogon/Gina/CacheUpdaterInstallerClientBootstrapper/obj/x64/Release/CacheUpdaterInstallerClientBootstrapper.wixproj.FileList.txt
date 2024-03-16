@@ -1,0 +1,6 @@
+E:\MiToken\WindowsLogon\build\x64\Release\Mi-Token Cache Updater Installer Client_64bit.exe
+E:\MiToken\WindowsLogon\build\x64\Release\Mi-Token Cache Updater Installer Client_64bit.wixpdb
+obj\x64\Release\Bundle.wixobj
+obj\x64\Release\CacheUpdaterInstallerClientBootstrapper.wixproj.BindContentsFileList.txt
+obj\x64\Release\CacheUpdaterInstallerClientBootstrapper.wixproj.BindOutputsFileList.txt
+obj\x64\Release\CacheUpdaterInstallerClientBootstrapper.wixproj.BindBuiltOutputsFileList.txt

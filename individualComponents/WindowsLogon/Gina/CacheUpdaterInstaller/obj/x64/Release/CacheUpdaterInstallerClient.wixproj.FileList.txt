@@ -1,0 +1,9 @@
+E:\MiToken\WindowsLogon\build\x64\Release\CacheUpdaterInstaller.msi
+E:\MiToken\WindowsLogon\build\x64\Release\CacheUpdaterInstaller.wixpdb
+obj\x64\Release\CustNameDlg.wixobj
+obj\x64\Release\Product.wixobj
+obj\x64\Release\WelcomeEulaDlg_Custom.wixobj
+obj\x64\Release\WixUI_Minimal_Custom.wixobj
+obj\x64\Release\CacheUpdaterInstallerClient.wixproj.BindContentsFileListen-US.txt
+obj\x64\Release\CacheUpdaterInstallerClient.wixproj.BindOutputsFileListen-US.txt
+obj\x64\Release\CacheUpdaterInstallerClient.wixproj.BindBuiltOutputsFileListen-US.txt

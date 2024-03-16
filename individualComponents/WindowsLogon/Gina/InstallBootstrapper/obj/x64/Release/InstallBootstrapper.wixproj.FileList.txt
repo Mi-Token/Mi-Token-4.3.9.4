@@ -1,0 +1,6 @@
+E:\MiToken\WindowsLogon\build\x64\Release\InstallBootstrapper.exe
+E:\MiToken\WindowsLogon\build\x64\Release\InstallBootstrapper.wixpdb
+obj\x64\Release\Bundle.wixobj
+obj\x64\Release\InstallBootstrapper.wixproj.BindContentsFileList.txt
+obj\x64\Release\InstallBootstrapper.wixproj.BindOutputsFileList.txt
+obj\x64\Release\InstallBootstrapper.wixproj.BindBuiltOutputsFileList.txt

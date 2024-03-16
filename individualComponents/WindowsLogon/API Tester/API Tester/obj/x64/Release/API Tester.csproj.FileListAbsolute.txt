@@ -1,0 +1,9 @@
+E:\MiToken\WindowsLogon\build\x64\Release\API Tester.exe.config
+E:\MiToken\WindowsLogon\build\x64\Release\API Tester.exe
+E:\MiToken\WindowsLogon\build\x64\Release\API Tester.pdb
+E:\MiToken\WindowsLogon\API Tester\API Tester\obj\x64\Release\API Tester.csprojResolveAssemblyReference.cache
+E:\MiToken\WindowsLogon\API Tester\API Tester\obj\x64\Release\API_Tester.Form1.resources
+E:\MiToken\WindowsLogon\API Tester\API Tester\obj\x64\Release\API_Tester.Properties.Resources.resources
+E:\MiToken\WindowsLogon\API Tester\API Tester\obj\x64\Release\API Tester.csproj.GenerateResource.Cache
+E:\MiToken\WindowsLogon\API Tester\API Tester\obj\x64\Release\API Tester.exe
+E:\MiToken\WindowsLogon\API Tester\API Tester\obj\x64\Release\API Tester.pdb

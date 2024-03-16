@@ -1,0 +1,1103 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TaskScheduler</name>
+    </assembly>
+    <members>
+        <member name="T:TaskScheduler.TaskFlags">
+            <summary>
+            Flags which indicate options for the task
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TaskFlags.Interactive">
+            <summary>
+            This flag is used when converting Windows NT AT service jobs into work items. The Windows NT AT service job refers to At.exe, the Windows NT command-line utility used for creating jobs for the Windows NT Schedule service. The Task Scheduler service replaces the Schedule service and is backwards compatible with it. The conversion occurs when the Task Scheduler is installed on Windows NT/Windows 2000 — for example, if you install Internet Explorer 4.0, or upgrade to Windows 2000. During the setup process, the Task Scheduler installation code searches the registry for jobs created for the AT service and creates work items that will accomplish the same operation. For such converted jobs, the interactive flag is set if the task is intended to be displayed to the user. When this flag is not set, no work items are displayed in the Tasks folder, and no user interface associated with the task is presented to the user when the task is executed.
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TaskFlags.DeleteWhenDone">
+            <summary>
+            The task will be deleted when there are no more scheduled run times.
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TaskFlags.Disabled">
+            <summary>
+            The task is disabled. This is useful to temporarily prevent a task from running at the scheduled time(s).
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TaskFlags.StartOnlyIfIdle">
+            <summary>
+            The task begins only if the computer is not in use at the scheduled start time. Windows 95 only.
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TaskFlags.KillOnIdleEnd">
+            <summary>
+            The task terminates if the computer makes an idle to non-idle transition while the task is running. The computer is not considered idle until the IdleWait triggers' time elapses with no user input. Windows 95 only. For information regarding idle triggers, see <see cref="T:TaskScheduler.OnIdleTrigger"/>.
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TaskFlags.DontStartIfOnBatteries">
+            <summary>
+            The task does not start if its target computer is running on battery power. Windows 95 only.
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TaskFlags.KillIfGoingOnBatteries">
+            <summary>
+            The task ends, and the associated application quits if the task's target computer switches to battery power. Windows 95 only.
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TaskFlags.RunOnlyIfDocked">
+            <summary>
+            The task runs only if the system is docked. Windows 95 only.
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TaskFlags.Hidden">
+            <summary>
+            The task is hidden. When the task begins execution, it runs in a hidden window.
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TaskFlags.RunIfConnectedToInternet">
+            <summary>
+            The task runs only if there is currently a valid Internet connection. Note This feature is currently not implemented.
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TaskFlags.RestartOnIdleResume">
+            <summary>
+            The task starts again if the computer makes a non-idle to idle transition before all the task's task_triggers elapse. (Use this flag in conjunction with KillOnIdleEnd.) Windows 95 only.
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TaskFlags.SystemRequired">
+            <summary>
+            The task runs only if the SYSTEM account is available.
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TaskFlags.RunOnlyIfLoggedOn">
+            <summary>
+            The task runs only if the user specified in SetAccountInformation is logged on interactively. This flag has no effect on work items set to run in the local account.
+            </summary>
+        </member>
+        <member name="T:TaskScheduler.TaskStatus">
+            <summary>
+            Current status values for a task
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TaskStatus.Ready">
+            <summary>
+            The task is ready to run at its next scheduled time.
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TaskStatus.Running">
+            <summary>
+            The task is currently running.
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TaskStatus.NotScheduled">
+            <summary>
+            One or more of the properties that are needed to run this task on a schedule have not been set. 
+            </summary>
+        </member>
+        <member name="T:TaskScheduler.Task">
+            <summary>
+            Represents a scheduled task on the system
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.Task.iTask">
+            <summary>
+            Internal COM interface
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.Task.name">
+            <summary>
+            Name of task (with extension removed)
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.Task.triggers">
+            <summary>
+            List of triggers for current task
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.Task.setHiddenAttemptFailed">
+            <summary>
+            Set to true if Hidden property is used on a task that has not been saved.
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.Task.failedHiddenValue">
+            <summary>
+            Captures user request if setHiddenAttemptFailed is true
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.Task.#ctor(TaskSchedulerInterop.ITask,System.String)">
+            <summary>
+            Internal constructor for a task. Tasks can only be accessed through <see cref="P:TaskScheduler.Scheduler.Tasks"/>.
+            </summary>
+            <param name="iTask">Instance of an ITask</param>
+            <param name="taskName">Display name of the task</param>
+        </member>
+        <member name="M:TaskScheduler.Task.Run">
+            <summary>
+            Executes the task
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.Task.Save">
+            <summary>
+            Saves the current task and commits it to the system
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.Task.SetAccountInformation(System.String,System.String)">
+            <summary>
+            Sets the account and password under which the task will run
+            </summary>
+            <param name="accountName">Full account name (e.g. "DOMAIN\user")</param>
+            <param name="password">Password for the account</param>
+        </member>
+        <member name="M:TaskScheduler.Task.Terminate">
+            <summary>
+            Terminate the task if it is currently running
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.Task.ToString">
+            <summary>
+            Overridden. Outputs the name of the task, the application and parameters
+            </summary>
+            <returns>String representing task</returns>
+        </member>
+        <member name="M:TaskScheduler.Task.Dispose">
+            <summary>
+            Disposes object
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.Name">
+            <summary>
+            Gets the display name of the task
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.Triggers">
+            <summary>
+            Gets the list of triggers associated with the task
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.Hidden">
+            <summary>
+            Gets/sets the state of the task in the user display
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.ApplicationName">
+            <summary>
+            Gets/sets the application path that the task is to execute
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.AccountName">
+            <summary>
+            Gets the name of the account under which the task process will run (info only)
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.Comment">
+            <summary>
+            Gets/sets the comment associated with the task
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.Creator">
+            <summary>
+            Gets/sets the creator of the task (info only)
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.ErrorRetryCount">
+            <summary>
+            Gets/sets the number of times to retry task execution after failure. Not implemented.
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.ErrorRetryInterval">
+            <summary>
+            Gets/sets the time interval, in minutes, to delay between error retries. Not implemented.
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.ExitCode">
+            <summary>
+            Gets the Win32 exit code from the last execution of the task
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.Flags">
+            <summary>
+            Gets/sets the flags associated with the current task
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.IdleWaitMinutes">
+            <summary>
+            Gets/sets how long, in minutes, the system must remain idle before an idle trigger will execute. See <see cref="T:TaskScheduler.OnIdleTrigger"/>.
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.IdleWaitDeadlineMinutes">
+            <summary>
+            Gets/sets the maximum number of minutes that Task Scheduler will wait for the idle-time period. See <see cref="T:TaskScheduler.OnIdleTrigger"/>.
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.MaxRunTime">
+            <summary>
+            Gets/sets the maximum length of time the task can run
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.MostRecentRunTime">
+            <summary>
+            Gets the most recent time the task began running.
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.NextRunTime">
+            <summary>
+            Gets the next time the task will run. <see cref="F:System.DateTime.MinValue"/> returned if next time is not available.
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.Parameters">
+            <summary>
+            Gets/sets the command-line parameters for the task
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.Priority">
+            <summary>
+            Gets/sets the priority for the task process
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.Status">
+            <summary>
+            Gets the status of the task
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.FlagsEx">
+            <summary>
+            Flags associated with task. Not implemented.
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.WorkingDirectory">
+            <summary>
+            Gets/sets the working directory for the task
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Task.Tag">
+            <summary>
+            Gets/sets a Tag associated with the task (info only)
+            </summary>
+        </member>
+        <member name="T:TaskScheduler.TaskList">
+            <remarks>
+            Provides acccess to the tasks of the system.
+            </remarks>
+        </member>
+        <member name="F:TaskScheduler.TaskList.its">
+            <summary>
+            Underlying COM interface
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.TaskList.#ctor">
+            <summary>
+            Internal constructor - no public creation of TaskList objects, they are created from the Scheduler.
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.TaskList.NewTask(System.String)">
+            <summary>
+            Creates a new task on the system with the supplied <paramref name="name"/>.
+            </summary>
+            <param name="name">Unique display name for the task. If not unique, an ArgumentException will be thrown.</param>
+            <returns>Instance of new task</returns>
+            <exception cref="T:System.ArgumentException">There is already a task of the same name as the one supplied for the new task.</exception>
+        </member>
+        <member name="M:TaskScheduler.TaskList.Delete(System.String)">
+            <summary>
+            Deletes the task of the given <paramref name="name" />.
+            </summary>
+            <param name="name">Name of task to delete</param>
+        </member>
+        <member name="M:TaskScheduler.TaskList.GetEnumerator">
+            <summary>
+            Gets a TaskList enumerator
+            </summary>
+            <returns>Enumerator for TaskList</returns>
+        </member>
+        <member name="M:TaskScheduler.TaskList.Dispose">
+            <summary>
+            Disposes object
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.TaskList.TargetComputer">
+            <summary>
+            Name of target computer
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.TaskList.Item(System.String)">
+            <summary>
+            Indexer which retrieves task of given <paramref name="name" />.
+            </summary>
+            <param name="name">Name of task to retrieve</param>
+        </member>
+        <member name="T:TaskScheduler.TaskList.Enumerator">
+            <summary>
+            Enumerator for <c>TaskList</c>
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.TaskList.Enumerator.#ctor(TaskSchedulerInterop.ITaskScheduler)">
+            <summary>
+            Internal constructor - Only accessable through <see cref="P:TaskScheduler.Scheduler.Tasks"/>
+            </summary>
+            <param name="ts">ITaskScheduler instance</param>
+        </member>
+        <member name="M:TaskScheduler.TaskList.Enumerator.GetNextName">
+            <summary>
+            Gets the name of the next task
+            </summary>
+            <returns>Name of next task</returns>
+        </member>
+        <member name="M:TaskScheduler.TaskList.Enumerator.MoveNext">
+            <summary>
+            Moves to the next task. See <see cref="M:System.Collections.IEnumerator.MoveNext"/> for more information.
+            </summary>
+            <returns>true if next task found, false if no more tasks.</returns>
+        </member>
+        <member name="M:TaskScheduler.TaskList.Enumerator.Reset">
+            <summary>
+            Reset task enumeration. See <see cref="M:System.Collections.IEnumerator.Reset"/> for more information.
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.TaskList.Enumerator.Current">
+            <summary>
+            Retrieves the current task.  See <see cref="P:System.Collections.IEnumerator.Current"/> for more information.
+            </summary>
+        </member>
+        <member name="T:TaskScheduler.Scheduler">
+            <remarks>
+            Encapsulates the system task scheduler.
+            </remarks>
+            <example>
+            Example creates a local instance of the Task Scheduler and prints the tasks
+            <code>
+            Scheduler sched = new Scheduler();
+            foreach (Task t in sched.Tasks)
+            {
+              Console.WriteLine(t.ToString());
+            }
+            </code>
+            </example>
+        </member>
+        <member name="F:TaskScheduler.Scheduler.tasks">
+            <summary>
+            Internal field which holds TaskList instance
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.Scheduler.#ctor">
+            <summary>
+            Creates instance of task scheduler on local machine
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.Scheduler.#ctor(System.String)">
+            <summary>
+            Creates instance of task scheduler on remote machine
+            </summary>
+            <param name="computer">Name of remote machine</param>
+        </member>
+        <member name="P:TaskScheduler.Scheduler.TargetComputer">
+            <summary>
+            Gets/sets name of target computer. Null or emptry string specifies local computer.
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Scheduler.Tasks">
+            <summary>
+            Gets collection of system tasks
+            </summary>
+        </member>
+        <member name="T:TaskScheduler.TriggerType">
+            <summary>
+            Valid types of triggers
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TriggerType.RunOnce">
+            <summary>
+            Trigger is set to run the task a single time. 
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TriggerType.RunDaily">
+            <summary>
+            Trigger is set to run the task on a daily interval. 
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TriggerType.RunWeekly">
+            <summary>
+            Trigger is set to run the work item on specific days of a specific week of a specific month. 
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TriggerType.RunMonthly">
+            <summary>
+            Trigger is set to run the task on a specific day(s) of the month.
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TriggerType.RunMonthlyDOW">
+            <summary>
+            Trigger is set to run the task on specific days, weeks, and months.
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TriggerType.OnIdle">
+            <summary>
+            Trigger is set to run the task if the system remains idle for the amount of time specified by the idle wait time of the task.
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TriggerType.OnSystemStart">
+            <summary>
+            Trigger is set to run the task at system startup.
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TriggerType.OnLogon">
+            <summary>
+            Trigger is set to run the task when a user logs on. 
+            </summary>
+        </member>
+        <member name="T:TaskScheduler.DaysOfTheWeek">
+            <summary>
+            Values for days of the week (Monday, Tuesday, etc.)
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.DaysOfTheWeek.Sunday">
+            <summary>
+            Sunday
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.DaysOfTheWeek.Monday">
+            <summary>
+            Monday
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.DaysOfTheWeek.Tuesday">
+            <summary>
+            Tuesday
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.DaysOfTheWeek.Wednesday">
+            <summary>
+            Wednesday
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.DaysOfTheWeek.Thursday">
+            <summary>
+            Thursday
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.DaysOfTheWeek.Friday">
+            <summary>
+            Friday
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.DaysOfTheWeek.Saturday">
+            <summary>
+            Saturday
+            </summary>
+        </member>
+        <member name="T:TaskScheduler.WhichWeek">
+            <summary>
+            Values for week of month (first, second, ..., last)
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.WhichWeek.FirstWeek">
+            <summary>
+            First week of the month
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.WhichWeek.SecondWeek">
+            <summary>
+            Second week of the month
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.WhichWeek.ThirdWeek">
+            <summary>
+            Third week of the month
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.WhichWeek.FourthWeek">
+            <summary>
+            Forth week of the month
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.WhichWeek.LastWeek">
+            <summary>
+            Last week of the month
+            </summary>
+        </member>
+        <member name="T:TaskScheduler.MonthsOfTheYear">
+            <summary>
+            Values for months of the year (January, February, etc.)
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.MonthsOfTheYear.January">
+            <summary>
+            January
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.MonthsOfTheYear.February">
+            <summary>
+            February
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.MonthsOfTheYear.March">
+            <summary>
+            March
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.MonthsOfTheYear.April">
+            <summary>
+            April
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.MonthsOfTheYear.May">
+             <summary>
+            May 
+             </summary>
+        </member>
+        <member name="F:TaskScheduler.MonthsOfTheYear.June">
+            <summary>
+            June
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.MonthsOfTheYear.July">
+            <summary>
+            July
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.MonthsOfTheYear.August">
+            <summary>
+            August
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.MonthsOfTheYear.September">
+            <summary>
+            September
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.MonthsOfTheYear.October">
+            <summary>
+            October
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.MonthsOfTheYear.November">
+            <summary>
+            November
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.MonthsOfTheYear.December">
+            <summary>
+            December
+            </summary>
+        </member>
+        <member name="T:TaskScheduler.Trigger">
+            <summary>
+            Trigger encapsulates the triggers associated with tasks.
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.Trigger.#ctor">
+            <summary>
+            Internal bsae constructor
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.Trigger.#ctor(TaskSchedulerInterop.ITaskTrigger)">
+            <summary>
+            Internal constructor which initializes itself with values
+            from current ITaskTrigger interface
+            </summary>
+            <param name="iTrigger">Instance of ITaskTrigger from task</param>
+        </member>
+        <member name="M:TaskScheduler.Trigger.#ctor(TaskScheduler.Trigger)">
+            <summary>
+            Internal copy constructor
+            </summary>
+            <param name="t">Trigger to copy</param>
+        </member>
+        <member name="M:TaskScheduler.Trigger.GetTypedTrigger(TaskSchedulerInterop.ITaskTrigger)">
+            <summary>
+            Gets a new trigger based on type
+            </summary>
+            <param name="iTaskTrigger">Instance of ITaskTrigger</param>
+            <returns>Type specific Trigger</returns>
+        </member>
+        <member name="M:TaskScheduler.Trigger.ToString">
+            <summary>
+            Gets the string represenation of the trigger
+            </summary>
+            <returns>String representation of the trigger</returns>
+        </member>
+        <member name="M:TaskScheduler.Trigger.Equals(System.Object)">
+            <summary>
+            Determines if two triggers are internally equivalent
+            </summary>
+            <param name="obj">Value of trigger to compare</param>
+            <returns>true if triggers are internally equal</returns>
+        </member>
+        <member name="M:TaskScheduler.Trigger.GetHashCode">
+            <summary>
+            Gets a hash code for the current trigger
+            </summary>
+            <returns>Hash code</returns>
+        </member>
+        <member name="M:TaskScheduler.Trigger.Dispose">
+            <summary>
+            Disposes Trigger
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Trigger.InternalTaskTrigger">
+            <summary>
+            Internal: Gets value for taskTrigger
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Trigger.Type">
+            <summary>
+            Gets type of trigger
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Trigger.BeginDate">
+            <summary>
+            Gets/sets the beginning year, month, and day for the trigger
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Trigger.EndDate">
+            <summary>
+            Gets/sets the ending year, month, and day for the trigger
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Trigger.DurationMinutes">
+            <summary>
+            Gets/sets the number of minutes after the task starts that the trigger will remain active.
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Trigger.IntervalMinutes">
+            <summary>
+            Gets/sets the number of minutes between consecutive task executions. This number is counted from the start of the previous task.
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Trigger.KillAtDurationEnd">
+            <summary>
+            Gets/sets whether task will be killed (terminated) at the end of the task duration. See <see cref="P:TaskScheduler.Trigger.DurationMinutes"/>.
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.Trigger.Disabled">
+            <summary>
+            Gets/sets whether trigger is disabled
+            </summary>
+        </member>
+        <member name="T:TaskScheduler.Trigger.TaskTriggerFlags">
+            <summary>
+            Flags for triggers
+            </summary>
+        </member>
+        <member name="T:TaskScheduler.StartableTrigger">
+            <summary>
+            Base class for all triggers that have a start time
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.StartableTrigger.#ctor">
+            <summary>
+            Base constructor
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.StartableTrigger.#ctor(TaskSchedulerInterop.ITaskTrigger)">
+            <summary>
+            Internal copy constructor
+            </summary>
+            <param name="iTrigger">Trigger to copy</param>
+        </member>
+        <member name="M:TaskScheduler.StartableTrigger.SetStartTime(System.UInt16,System.UInt16)">
+            <summary>
+            Sets the start time of the task
+            </summary>
+            <param name="hour">Hour of the day that the trigger will start</param>
+            <param name="minute">Minutes of the hour</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">The hour is not between 0 and 23 or the minute is not between 0 and 59.</exception>
+        </member>
+        <member name="P:TaskScheduler.StartableTrigger.StartHour">
+            <summary>
+            Gets hour of the day that trigger will start (24 hour clock)
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.StartableTrigger.StartMinute">
+            <summary>
+            Gets minutes of the hour (specified in <see cref="P:TaskScheduler.StartableTrigger.StartHour"/>) that trigger will start
+            </summary>
+        </member>
+        <member name="T:TaskScheduler.RunOnceTrigger">
+            <summary>
+            Trigger that is only run once
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.RunOnceTrigger.#ctor(System.DateTime)">
+            <summary>
+            Create a trigger to be run once at the specified time
+            </summary>
+            <param name="runDateTime">Date and time to execute trigger</param>
+        </member>
+        <member name="M:TaskScheduler.RunOnceTrigger.#ctor(TaskSchedulerInterop.ITaskTrigger)">
+            <summary>
+            Internal constructor to create from existing Trigger
+            </summary>
+            <param name="iTrigger">Current base Trigger</param>
+        </member>
+        <member name="T:TaskScheduler.DailyTrigger">
+            <summary>
+            Trigger that will run at specified time every day
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.DailyTrigger.#ctor(System.Int16,System.Int16,System.Int16)">
+            <summary>
+            Creates trigger that will run at specified time on a daily interval
+            </summary>
+            <param name="hour">Hour of day task will start</param>
+            <param name="minutes">Minutes of hour (specified in "hour") task will start</param>
+            <param name="daysInterval">Number of days between task runs</param>
+        </member>
+        <member name="M:TaskScheduler.DailyTrigger.#ctor(System.Int16,System.Int16)">
+            <summary>
+            Creates trigger that will run at specified time every day
+            </summary>
+            <param name="hour">Hour of day task will start</param>
+            <param name="minutes">Minutes of hour (specified in "hour") task will start</param>
+        </member>
+        <member name="M:TaskScheduler.DailyTrigger.#ctor(TaskSchedulerInterop.ITaskTrigger)">
+            <summary>
+            Internal constructor to create from existing Trigger
+            </summary>
+            <param name="iTrigger">Current base Trigger</param>
+        </member>
+        <member name="P:TaskScheduler.DailyTrigger.DaysInterval">
+            <summary>
+            Gets the number of days between task runs
+            </summary>
+        </member>
+        <member name="T:TaskScheduler.WeeklyTrigger">
+            <summary>
+            Trigger that will run on a regular weekly interval
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.WeeklyTrigger.#ctor(System.Int16,System.Int16,TaskScheduler.DaysOfTheWeek,System.Int16)">
+            <summary>
+            Creates a trigger that will run on specific days of the week at a specified time on a regular weekly interval
+            </summary>
+            <param name="hour">Hour of day task will start</param>
+            <param name="minutes">Minutes of hour (specified in "hour") task will start</param>
+            <param name="daysOfTheWeek">Days of the week task will run</param>
+            <param name="weeksInterval">Number of weeks between task runs</param>
+        </member>
+        <member name="M:TaskScheduler.WeeklyTrigger.#ctor(System.Int16,System.Int16,TaskScheduler.DaysOfTheWeek)">
+            <summary>
+            Creates a trigger that will run on specific days of the week at a specified time every week
+            </summary>
+            <param name="hour">Hour of day task will start</param>
+            <param name="minutes">Minutes of hour (specified in "hour") task will start</param>
+            <param name="daysOfTheWeek">Days of the week task will run</param>
+        </member>
+        <member name="M:TaskScheduler.WeeklyTrigger.#ctor(TaskSchedulerInterop.ITaskTrigger)">
+            <summary>
+            Internal constructor to create from existing Trigger
+            </summary>
+            <param name="iTrigger">Current base Trigger</param>
+        </member>
+        <member name="P:TaskScheduler.WeeklyTrigger.WeeksInterval">
+            <summary>
+            Gets number of weeks between task runs
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.WeeklyTrigger.WeekDays">
+            <summary>
+            Gets the days of the week on which the task will run
+            </summary>
+        </member>
+        <member name="T:TaskScheduler.MonthlyDOWTrigger">
+            <summary>
+            Trigger that will run on the specified days of the week for
+            the specified weeks in the specified months at the specified time.
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.MonthlyDOWTrigger.#ctor(System.Int16,System.Int16,TaskScheduler.DaysOfTheWeek,TaskScheduler.WhichWeek,TaskScheduler.MonthsOfTheYear)">
+            <summary>
+            Creates a trigger that will run on the specified days of the week for
+            the specified weeks in the specified months at the specified time.
+            </summary>
+            <param name="hour">Hour of day task will start</param>
+            <param name="minutes">Minutes of hour (specified in "hour") task will start</param>
+            <param name="daysOfTheWeek">Days of the week task will run</param>
+            <param name="whichWeeks">Weeks of the month task will run</param>
+            <param name="months">Months of the year task will run</param>
+        </member>
+        <member name="M:TaskScheduler.MonthlyDOWTrigger.#ctor(System.Int16,System.Int16,TaskScheduler.DaysOfTheWeek,TaskScheduler.WhichWeek)">
+            <summary>
+            Creates a trigger that will run on the specified days of the week for
+            the specified weeks every month at the specified time.
+            </summary>
+            <param name="hour">Hour of day task will start</param>
+            <param name="minutes">Minutes of hour (specified in "hour") task will start</param>
+            <param name="daysOfTheWeek">Days of the week task will run</param>
+            <param name="whichWeeks">Weeks of the month task will run</param>
+        </member>
+        <member name="M:TaskScheduler.MonthlyDOWTrigger.#ctor(TaskSchedulerInterop.ITaskTrigger)">
+            <summary>
+            Internal constructor to create from existing Trigger
+            </summary>
+            <param name="iTrigger">Current base Trigger</param>
+        </member>
+        <member name="P:TaskScheduler.MonthlyDOWTrigger.WhichWeeks">
+            <summary>
+            Gets weeks of the month task will run
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.MonthlyDOWTrigger.WeekDays">
+            <summary>
+            Gets days of the week task will run
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.MonthlyDOWTrigger.Months">
+            <summary>
+            Gets months of the year task will run
+            </summary>
+        </member>
+        <member name="T:TaskScheduler.MonthlyTrigger">
+            <summary>
+            Trigger that will run on the specified days of the specified months
+            at the specified time
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.MonthlyTrigger.#ctor(System.Int16,System.Int16,System.Int32[],TaskScheduler.MonthsOfTheYear)">
+            <summary>
+            Creates a trigger that will run on the specified days of the specified months
+            at the specified time
+            </summary>
+            <param name="hour">Hour of day task will start</param>
+            <param name="minutes">Minutes of hour (specified in "hour") task will start</param>
+            <param name="daysOfMonth">Days of the month task will run</param>
+            <param name="months">Months of the year task will run</param>
+        </member>
+        <member name="M:TaskScheduler.MonthlyTrigger.#ctor(System.Int16,System.Int16,System.Int32[])">
+            <summary>
+            Creates a trigger that will run on the specified days every month
+            at the specified time
+            </summary>
+            <param name="hour">Hour of day task will start</param>
+            <param name="minutes">Minutes of hour (specified in "hour") task will start</param>
+            <param name="daysOfMonth">Days of the month task will run</param>
+        </member>
+        <member name="M:TaskScheduler.MonthlyTrigger.#ctor(TaskSchedulerInterop.ITaskTrigger)">
+            <summary>
+            Internal constructor to create from existing Trigger
+            </summary>
+            <param name="iTrigger">Current base Trigger</param>
+        </member>
+        <member name="P:TaskScheduler.MonthlyTrigger.Months">
+            <summary>
+            Gets months of the year task will run
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.MonthlyTrigger.Days">
+            <summary>
+            Gets days of the month task will run
+            </summary>
+        </member>
+        <member name="T:TaskScheduler.OnIdleTrigger">
+            <summary>
+            Trigger that will run when the system is idle.
+            Dependent on values set in task. See <see cref="P:TaskScheduler.Task.IdleWaitMinutes"/>.
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.OnIdleTrigger.#ctor">
+            <summary>
+            Creates a trigger that will run when the system is idle.
+            Dependent on values set in task. See <see cref="P:TaskScheduler.Task.IdleWaitMinutes"/>.
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.OnIdleTrigger.#ctor(TaskSchedulerInterop.ITaskTrigger)">
+            <summary>
+            Internal constructor to create from existing Trigger
+            </summary>
+            <param name="iTrigger">Current base Trigger</param>
+        </member>
+        <member name="T:TaskScheduler.OnSystemStartTrigger">
+            <summary>
+            Trigger that will run when the system starts.
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.OnSystemStartTrigger.#ctor">
+            <summary>
+            Creates a trigger that will run when the system starts.
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.OnSystemStartTrigger.#ctor(TaskSchedulerInterop.ITaskTrigger)">
+            <summary>
+            Internal constructor to create from existing Trigger
+            </summary>
+            <param name="iTrigger">Current base Trigger</param>
+        </member>
+        <member name="T:TaskScheduler.OnLogonTrigger">
+            <summary>
+            Trigger that will run when the user logs on.
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.OnLogonTrigger.#ctor">
+            <summary>
+            Creates a trigger that will run when the user logs on.
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.OnLogonTrigger.#ctor(TaskSchedulerInterop.ITaskTrigger)">
+            <summary>
+            Internal constructor to create from existing Trigger
+            </summary>
+            <param name="iTrigger">Current base Trigger</param>
+        </member>
+        <member name="T:TaskScheduler.TriggerList">
+            <summary>
+            TriggerList encapsulates the list of triggers associated with as task.
+            </summary>
+        </member>
+        <member name="F:TaskScheduler.TriggerList.iTask">
+            <summary>
+            Internal COM interface
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.TriggerList.#ctor(TaskSchedulerInterop.ITask)">
+            <summary>
+            Internal constructor creates trigger collection
+            </summary>
+            <param name="iTask">Instance of an ITask</param>
+        </member>
+        <member name="M:TaskScheduler.TriggerList.RemoveAt(System.Int32)">
+            <summary>
+            Removes trigger at specified index
+            </summary>
+            <param name="index">Index of trigger to remove</param>
+        </member>
+        <member name="M:TaskScheduler.TriggerList.System#Collections#IList#Insert(System.Int32,System.Object)">
+            <summary>
+            Inserts a trigger at the specified index. Not implemented.
+            </summary>
+            <param name="index">Index to insert trigger</param>
+            <param name="value">Value of trigger to insert</param>
+        </member>
+        <member name="M:TaskScheduler.TriggerList.Remove(TaskScheduler.Trigger)">
+            <summary>
+            Removes the matching trigger
+            </summary>
+            <param name="trigger">Trigger to remove</param>
+        </member>
+        <member name="M:TaskScheduler.TriggerList.System#Collections#IList#Remove(System.Object)">
+            <summary>
+            IList.Remove implementation
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.TriggerList.Contains(TaskScheduler.Trigger)">
+            <summary>
+            Test to see if trigger is part of the collection
+            </summary>
+            <param name="trigger">Trigger to find</param>
+            <returns>true if trigger found in collection</returns>
+        </member>
+        <member name="M:TaskScheduler.TriggerList.System#Collections#IList#Contains(System.Object)">
+            <summary>
+            IList.Contains implementation
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.TriggerList.Clear">
+            <summary>
+            Remove all triggers from collection
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.TriggerList.IndexOf(TaskScheduler.Trigger)">
+            <summary>
+            Returns the index of the supplied Trigger
+            </summary>
+            <param name="trigger">Trigger to find</param>
+            <returns>Zero based index of value, -1 if not found</returns>
+        </member>
+        <member name="M:TaskScheduler.TriggerList.System#Collections#IList#IndexOf(System.Object)">
+            <summary>
+            IList.IndexOf implementation
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.TriggerList.Add(TaskScheduler.Trigger)">
+            <summary>
+            Add the supplied trigger to the collection
+            </summary>
+            <param name="trigger">Trigger to add</param>
+            <returns>Index of added trigger</returns>
+        </member>
+        <member name="M:TaskScheduler.TriggerList.System#Collections#IList#Add(System.Object)">
+            <summary>
+            IList.Add implementation
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.TriggerList.CopyTo(System.Array,System.Int32)">
+            <summary>
+            Copies list of triggers to supplied array beginning at index
+            </summary>
+            <param name="array">Array to copy triggers into</param>
+            <param name="index">Index at which to start inserting</param>
+        </member>
+        <member name="M:TaskScheduler.TriggerList.GetEnumerator">
+            <summary>
+            Gets a TriggerList enumerator
+            </summary>
+            <returns>Enumerator for TriggerList</returns>
+        </member>
+        <member name="M:TaskScheduler.TriggerList.Dispose">
+            <summary>
+            Disposes object
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.TriggerList.IsReadOnly">
+            <summary>
+            Gets read-only state of collection. Always false.
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.TriggerList.Item(System.Int32)">
+            <summary>
+            Gets/sets the trigger at the specified index
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.TriggerList.System#Collections#IList#$Item$(System.Int32)">
+            <summary>
+            IList.this[int] implementation
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.TriggerList.IsFixedSize">
+            <summary>
+            Returns whether collection is a fixed size. Always returns false.
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.TriggerList.IsSynchronized">
+            <summary>
+            Returns synchronizable state. Always false since the Task Scheduler is not
+            thread safe.
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.TriggerList.Count">
+            <summary>
+            Gets the number of triggers in the collection
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.TriggerList.SyncRoot">
+            <summary>
+            Gets the root object for synchronization. Always null.
+            </summary>
+        </member>
+        <member name="T:TaskScheduler.TriggerList.Enumerator">
+            <summary>
+            Enumerator for TriggerList
+            </summary>
+        </member>
+        <member name="M:TaskScheduler.TriggerList.Enumerator.#ctor(TaskSchedulerInterop.ITask)">
+            <summary>
+            Internal constructor - Only accessable through <see cref="P:TaskScheduler.Task.Triggers"/>
+            </summary>
+            <param name="iTask">Instance of an ITask</param>
+        </member>
+        <member name="M:TaskScheduler.TriggerList.Enumerator.MoveNext">
+            <summary>
+            Moves to the next trigger. See <see cref="M:System.Collections.IEnumerator.MoveNext"/> for more information.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TaskScheduler.TriggerList.Enumerator.Reset">
+            <summary>
+            Reset trigger enumeration. See <see cref="M:System.Collections.IEnumerator.Reset"/> for more information.
+            </summary>
+        </member>
+        <member name="P:TaskScheduler.TriggerList.Enumerator.Current">
+            <summary>
+            Retrieves the current trigger.  See <see cref="P:System.Collections.IEnumerator.Current"/> for more information.
+            </summary>
+        </member>
+    </members>
+</doc>

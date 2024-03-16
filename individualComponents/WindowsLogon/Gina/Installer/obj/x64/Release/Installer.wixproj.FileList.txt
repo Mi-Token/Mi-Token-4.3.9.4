@@ -1,0 +1,6 @@
+E:\MiToken\WindowsLogon\build\x64\Release\Mi-Token Desktop Login.msi
+E:\MiToken\WindowsLogon\build\x64\Release\Mi-Token Desktop Login.wixpdb
+obj\x64\Release\Product.wixobj
+obj\x64\Release\Installer.wixproj.BindContentsFileListen-US.txt
+obj\x64\Release\Installer.wixproj.BindOutputsFileListen-US.txt
+obj\x64\Release\Installer.wixproj.BindBuiltOutputsFileListen-US.txt

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <?define UpgradeCode="{356B8E13-FD3F-4832-B32E-D1067492726B}"?>
+
+  <!-- Just copying and pasting from: mitoken-central\RADIUS\setup\includes\Platforms.wxs -->
+  <!-- Latest Version has proper pre processor options-->
+  <?define ProductVersion=!(bind.FileVersion.ServiceExe)?>
+  <?define ProductName="Mi-Token Cache Updater - Client"?>
+  <?define CRTarch = "x86_x64" ?>
+  <?if $(var.Platform) = "x86" ?>
+  <?define Win64 = "no" ?>
+  <?define ProgramFilesFolder = "ProgramFilesFolder" ?>
+  <?else?>
+  <?define Win64 = "yes" ?>
+  <?define ProgramFilesFolder = "ProgramFiles64Folder" ?>
+  <?endif?>
+  <?define BuildBase = "no" ?>
+
+
+
+  <Product Id="*" Name="Mi-Token Cache Updater - Client" Language="1033" Version="$(var.ProductVersion)" Manufacturer="Mi-Token Inc." UpgradeCode="c82874c6-7150-457d-b116-28d864c59034">
+    <Package Description="Mi-Token Cache Updater - Client" Comments="(C) 2012-2016 Mi-Token Unit Trust" InstallerVersion="200" Compressed="yes" InstallPrivileges="elevated" InstallScope="perMachine"/>
+
+    <!-- We require .NET 4.0 or newer to run the config util. -->
+    <PropertyRef Id="NETFRAMEWORK40FULL"/>
+    <Condition Message="This product requires .NET Framework 4.0. Please install.">
+      <![CDATA[Installed or NETFRAMEWORK40FULL]]>
+    </Condition>
+
+    <!-- If we are building for 32bit, but running on a 64 bit machine, warn the user -->
+    <?if $(var.Win64) = "no"?>
+    <Condition Message="You are attemnpting to run the 32-bit installer on a 64-bit system">
+      <![CDATA[NOT Msix64]]>
+    </Condition>
+    <?endif?>
+
+    <Media Id="1" Cabinet="Installer.cab" EmbedCab="yes" />
+    <UIRef Id="WixUI_ErrorProgressText" />
+
+    <WixVariable Id='WixUIBannerBmp' Value='../../../RADIUS/setup/Banner_top.bmp' />
+    <WixVariable Id='WixUIDialogBmp' Value='../../../RADIUS/setup/Banner_left.bmp' />
+    <Icon Id='mitoken.icon.exe' SourceFile='../../../RADIUS/setup/mitoken.icon.exe' />
+
+    <UI>
+      <UIRef Id="WixUI_Minimal_Custom" />
+      <UIRef Id="WixUI_ErrorProgressText" />
+    </UI>
+
+    <Property Id="ARPPRODUCTICON" Value="mitoken.icon.exe" />
+    <Property Id="CUSTNAME" Secure="yes">
+      <RegistrySearch Id="CustName" Type="raw" Root="HKLM" Key="Software\Mi-Token\Logon\Config" Name="CacheServerCustomerName" />
+    </Property>
+    <Property Id="UNATTENDED" Secure="yes" />
+    <Property Id="PRESETCUSTNAME" Secure="yes" />
+    
+    <SetProperty Id="CUSTNAME"  Before="WriteRegistryValues" Sequence="execute" Value="[PRESETCUSTNAME]">
+       <![CDATA[UNATTENDED=1]]>
+    </SetProperty> 
+
+    <Condition Message="A later version of the Mi-Token Cache Updater - Client is already installed">NOT NEWERVERSIONDETECTED</Condition>
+    <CustomActionRef Id="AlreadyInstalled" />
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="WINDOWSVOLUME">
+        <Directory Id='$(var.ProgramFilesFolder)' Name='Program Files'>
+          <Directory Id="CompanyFolder" Name="Mi-Token">
+            <Directory Id="INSTALLLOCATION" Name="Mi-Token Cache Updater - Client" FileSource="$(var.BinariesDir)">
+              <!--
+              <Component Id="ConfigurationComponent" Guid='4EF65C6D-FFE6-4CD4-84AD-454470B1E02F' Win64="$(var.Win64)">
+                <File Id="ServiceConfigTool" Name='OTP Cache Config.exe' DiskId='1' Vital='yes' />
+              </Component>
+              -->
+              <Component Id="ServiceComponent" Guid='1A636F16-860D-4942-AB7A-1991C41B3AD1' Win64='$(var.Win64)'>
+                <CreateFolder>
+                  <PermissionEx Sddl="D:P(A;OICI;GA;;;SY)(A;OICI;GA;;;BA)" />
+                </CreateFolder>
+                <File Id='ServiceExe' Name='MiTokenOfflineTokenSync.exe' DiskId='1' Vital='yes'>
+                </File>
+                <RegistryKey Id='RegKeyServer' Action='create' Root='HKLM' Key='SOFTWARE\Mi-Token\Logon\Config'>
+                  <RegistryValue Type='string' Name='CacheServerCustomerName' Value='[CUSTNAME]' />
+                  <RegistryValue Type='string' Name='CacheServerAddress' Value='mobile.mi-token.com/v5cache' />
+                  <RegistryValue Type='integer' Name='CachePollInSeconds' Value='120' />
+                  <RegistryValue Type='integer' Name='EnableOTPCaching' Value='1' />
+                  <RegistryValue Type='integer' Name='CacheClientWaitInMin' Value='120' />
+                  <RegistryValue Type='integer' Name='OTPCacheTOTP' Value='0' />
+                  <RegistryValue Type='integer' Name='OTPCacheHOTP' Value='0' />
+                </RegistryKey>
+
+
+
+                <ServiceInstall Id="ServiceInstaller" Type="ownProcess" Vital="yes" Name="Mi-Token Client Cache Updater" DisplayName="Mi-Token Client Cache Updater"
+                                Description="Keeps the Mi-Token OTP Cache up to date" Start="demand" Account="LocalSystem" ErrorControl="ignore" Interactive="no" />
+                <ServiceControl Id="StartService" Stop="both" Remove="uninstall" Name="Mi-Token Client Cache Updater" />
+              </Component>
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+    <SetDirectory Id="WINDOWSVOLUME" Value="[WindowsVolume]"/>
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
+    <!--
+    <UIRef Id="WixUI_InstallDir" />
+    -->
+  </Fragment>
+  
+  <Fragment>
+  	<Feature Id="ProductFeature" Title="Mi-Token Cache Updater - Client" Level="1">
+			<ComponentRef Id="ServiceComponent" />
+		</Feature>
+    
+    <Upgrade Id="$(var.UpgradeCode)">
+      <UpgradeVersion Minimum="$(var.ProductVersion)" IncludeMinimum="no" OnlyDetect="yes" Property="NEWERVERSIONDETECTED" />
+
+      <UpgradeVersion Minimum="0.0.0" IncludeMinimum="yes" Maximum="$(var.ProductVersion)" IncludeMaximum="yes" Property="OLDERVERSIONBEINGUPGRADED"/>
+    </Upgrade>
+
+    <CustomAction Id="AlreadyInstalled" Error="$(var.ProductName) $(var.ProductVersion) has already been installed" />
+    <CustomAction Id="NoDowngrade" Error="A later version of $(var.ProductName) is already installed." />
+    
+    <InstallExecuteSequence>
+      <Custom Action="AlreadyInstalled" After="FindRelatedProducts">SELFFOUND</Custom>
+      <Custom Action="NoDowngrade" After="FindRelatedProducts">NEWERFOUND</Custom>
+      <RemoveExistingProducts After="InstallInitialize" Overridable="yes" />
+    </InstallExecuteSequence>
+    
+    <InstallUISequence>
+      <Custom Action="AlreadyInstalled" After="FindRelatedProducts">SELFFOUND</Custom>
+      <Custom Action="NoDowngrade" After="FindRelatedProducts">NEWERFOUND</Custom>
+    </InstallUISequence>
+
+  </Fragment>
+</Wix>

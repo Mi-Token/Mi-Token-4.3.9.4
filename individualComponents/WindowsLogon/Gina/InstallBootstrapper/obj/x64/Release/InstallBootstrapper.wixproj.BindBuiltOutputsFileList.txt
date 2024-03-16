@@ -1,0 +1,2 @@
+E:\MiToken\WindowsLogon\build\x64\Release\InstallBootstrapper.exe
+E:\MiToken\WindowsLogon\build\x64\Release\InstallBootstrapper.wixpdb

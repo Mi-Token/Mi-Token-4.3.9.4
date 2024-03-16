@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.8</ProductVersion>
+    <ProjectGuid>7e9bff82-fb26-4c7b-a14d-feb6fe722ed2</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>CacheUpdaterInstaller</OutputName>
+    <OutputType>Package</OutputType>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <Name>CacheUpdaterInstallerClient</Name>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>../../build/$(PlatformName)/$(ConfigurationName)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug;BinariesDir=..\..\build\$(PlatformName)\$(ConfigurationName)\</DefineConstants>
+    <WixVariables>WixUILicenseRtf=..\Installer\License.rtf</WixVariables>
+    <Cultures>en-US</Cultures>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>../../build/$(PlatformName)/$(ConfigurationName)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>BinariesDir=..\..\build\$(PlatformName)\$(ConfigurationName)\</DefineConstants>
+    <WixVariables>WixUILicenseRtf=..\Installer\License.rtf</WixVariables>
+    <Cultures>en-US</Cultures>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DefineConstants>Debug;BinariesDir=..\..\build\$(PlatformName)\$(ConfigurationName)\</DefineConstants>
+    <WixVariables>WixUILicenseRtf=..\Installer\License.rtf</WixVariables>
+    <Cultures>en-US</Cultures>
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <DefineConstants>BinariesDir=..\..\build\x64\Release\</DefineConstants>
+    <WixVariables>WixUILicenseRtf=..\Installer\License.rtf</WixVariables>
+    <Cultures>en-US</Cultures>
+    <OutputPath>..\..\build\$(Platform)\Release\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="CustNameDlg.wxs" />
+    <Compile Include="Product.wxs" />
+    <Compile Include="WelcomeEulaDlg_Custom.wxs" />
+    <Compile Include="WixUI_Minimal_Custom.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
+      <Name>WixNetFxExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixUtilExtension">
+      <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
+      <Name>WixUtilExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <PropertyGroup>
+    <PreBuildEvent>copy "$(TargetDir)..\..\..\MiTokenOfflineTokenSync\OTP Cache Config\bin\Release\OTP Cache Config.exe" "$(TargetDir)OTP Cache Config.exe"
+copy "$(TargetDir)..\..\..\MiTokenOfflineTokenSync\MiTokenOfflineTokenSync\bin\x64\Release\MiTokenOfflineTokenSync.exe" "$(TargetDir)MiTokenOfflineTokenSync.exe"</PreBuildEvent>
+  </PropertyGroup>
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+</Project>

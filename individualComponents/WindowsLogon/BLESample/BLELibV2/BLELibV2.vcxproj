@@ -1,0 +1,447 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="DebugWithEx|Win32">
+      <Configuration>DebugWithEx</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugWithEx|x64">
+      <Configuration>DebugWithEx</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="UnitTest|Win32">
+      <Configuration>UnitTest</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="UnitTest|x64">
+      <Configuration>UnitTest</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5F522EFA-05D5-4164-B8C1-31529F1A7704}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>BLELibV2</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnitTest|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnitTest|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugWithEx|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugWithEx|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='UnitTest|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='UnitTest|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugWithEx|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugWithEx|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnitTest|Win32'">
+    <OutDir>$(SolutionDir)$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugWithEx|Win32'">
+    <OutDir>$(SolutionDir)$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnitTest|x64'">
+    <OutDir>$(SolutionDir)$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugWithEx|x64'">
+    <OutDir>$(SolutionDir)$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;USE_APITYPES_HEADER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <AdditionalIncludeDirectories>..\..\OpenSSL\x86\include\openSSL;$(ProjectDir)..\Include\</AdditionalIncludeDirectories>
+      <BrowseInformation>true</BrowseInformation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PreBuildEvent>
+      <Command>Mkdir "$(ProjectDir)..\Include"
+Copy "$(ProjectDir)BLE_API.h" "$(ProjectDir)..\Include\BLE_API.h"
+Copy "$(ProjectDir)BLE_API_Ext.h" "$(ProjectDir)..\Include\BLE_API_Ext.h"
+Copy "$(ProjectDir)BLE_API_Types.h" "$(ProjectDir)..\Include\BLE_API_Types.h"
+Copy "$(ProjectDir)BLE_API_ExtraTypes.h" "$(ProjectDir)..\Include\BLE_API_ExtraTypes.h"
+Copy "$(ProjectDir)MiTokenBLE_UUIDs.h" "$(ProjectDir)..\Include\MiTokenBLE_UUIDs.h"</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>MkDir "$(ProjectDir)..\Lib\$(PlatformTarget)\$(Configuration)"
+Copy "$(OutDir)$(TargetFileName)" "$(ProjectDir)..\Lib\$(PlatformTarget)\$(Configuration)\$(TargetFileName)"</Command>
+    </PostBuildEvent>
+    <Bscmake>
+      <PreserveSBR>true</PreserveSBR>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='UnitTest|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;USE_APITYPES_HEADER;UNIT_TEST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <AdditionalIncludeDirectories>..\..\OpenSSL\x86\include\openSSL;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PreBuildEvent>
+      <Command>Mkdir "$(ProjectDir)..\Include"
+Copy "$(ProjectDir)BLE_API.h" "$(ProjectDir)..\Include\BLE_API.h"
+Copy "$(ProjectDir)BLE_API_Ext.h" "$(ProjectDir)..\Include\BLE_API_Ext.h"
+Copy "$(ProjectDir)BLE_API_Types.h" "$(ProjectDir)..\Include\BLE_API_Types.h"
+Copy "$(ProjectDir)BLE_API_ExtraTypes.h" "$(ProjectDir)..\Include\BLE_API_ExtraTypes.h"
+Copy "$(ProjectDir)MiTokenBLE_UUIDs.h" "$(ProjectDir)..\Include\MiTokenBLE_UUIDs.h"</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>MkDir "$(ProjectDir)..\Lib\$(PlatformTarget)\$(Configuration)"
+Copy "$(OutDir)$(TargetFileName)" "$(ProjectDir)..\Lib\$(PlatformTarget)\$(Configuration)\$(TargetFileName)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;USE_APITYPES_HEADER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <AdditionalIncludeDirectories>..\..\OpenSSL\x86\include\openSSL;$(ProjectDir)..\Include\</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PreBuildEvent>
+      <Command>Mkdir "$(ProjectDir)..\Include"
+Copy "$(ProjectDir)BLE_API.h" "$(ProjectDir)..\Include\BLE_API.h"
+Copy "$(ProjectDir)BLE_API_Ext.h" "$(ProjectDir)..\Include\BLE_API_Ext.h"
+Copy "$(ProjectDir)BLE_API_Types.h" "$(ProjectDir)..\Include\BLE_API_Types.h"
+Copy "$(ProjectDir)BLE_API_ExtraTypes.h" "$(ProjectDir)..\Include\BLE_API_ExtraTypes.h"
+Copy "$(ProjectDir)MiTokenBLE_UUIDs.h" "$(ProjectDir)..\Include\MiTokenBLE_UUIDs.h"</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>MkDir "$(ProjectDir)..\Lib\$(PlatformTarget)\$(Configuration)"
+Copy "$(OutDir)$(TargetFileName)" "$(ProjectDir)..\Lib\$(PlatformTarget)\$(Configuration)\$(TargetFileName)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='UnitTest|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;USE_APITYPES_HEADER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <AdditionalIncludeDirectories>..\..\OpenSSL\x86\include\openSSL;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PreBuildEvent>
+      <Command>Mkdir "$(ProjectDir)..\Include"
+Copy "$(ProjectDir)BLE_API.h" "$(ProjectDir)..\Include\BLE_API.h"
+Copy "$(ProjectDir)BLE_API_Ext.h" "$(ProjectDir)..\Include\BLE_API_Ext.h"
+Copy "$(ProjectDir)BLE_API_Types.h" "$(ProjectDir)..\Include\BLE_API_Types.h"
+Copy "$(ProjectDir)BLE_API_ExtraTypes.h" "$(ProjectDir)..\Include\BLE_API_ExtraTypes.h"
+Copy "$(ProjectDir)MiTokenBLE_UUIDs.h" "$(ProjectDir)..\Include\MiTokenBLE_UUIDs.h"</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>MkDir "$(ProjectDir)..\Lib\$(PlatformTarget)\$(Configuration)"
+Copy "$(OutDir)$(TargetFileName)" "$(ProjectDir)..\Lib\$(PlatformTarget)\$(Configuration)\$(TargetFileName)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugWithEx|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;USE_APITYPES_HEADER;BLEAPI_USEEX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <AdditionalIncludeDirectories>..\..\OpenSSL\x86\include\openSSL;</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PreBuildEvent>
+      <Command>Mkdir "$(ProjectDir)..\Include"
+Copy "$(ProjectDir)BLE_API.h" "$(ProjectDir)..\Include\BLE_API.h"
+Copy "$(ProjectDir)BLE_API_Ext.h" "$(ProjectDir)..\Include\BLE_API_Ext.h"
+Copy "$(ProjectDir)BLE_API_Types.h" "$(ProjectDir)..\Include\BLE_API_Types.h"
+Copy "$(ProjectDir)BLE_API_ExtraTypes.h" "$(ProjectDir)..\Include\BLE_API_ExtraTypes.h"
+Copy "$(ProjectDir)MiTokenBLE_UUIDs.h" "$(ProjectDir)..\Include\MiTokenBLE_UUIDs.h"</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>MkDir "$(ProjectDir)..\Lib\$(PlatformTarget)\$(Configuration)"
+Copy "$(OutDir)$(TargetFileName)" "$(ProjectDir)..\Lib\$(PlatformTarget)\$(Configuration)\$(TargetFileName)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugWithEx|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;USE_APITYPES_HEADER;BLEAPI_USEEX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <AdditionalIncludeDirectories>..\..\OpenSSL\x86\include\openSSL;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PreBuildEvent>
+      <Command>Mkdir "$(ProjectDir)..\Include"
+Copy "$(ProjectDir)BLE_API.h" "$(ProjectDir)..\Include\BLE_API.h"
+Copy "$(ProjectDir)BLE_API_Ext.h" "$(ProjectDir)..\Include\BLE_API_Ext.h"
+Copy "$(ProjectDir)BLE_API_Types.h" "$(ProjectDir)..\Include\BLE_API_Types.h"
+Copy "$(ProjectDir)BLE_API_ExtraTypes.h" "$(ProjectDir)..\Include\BLE_API_ExtraTypes.h"
+Copy "$(ProjectDir)MiTokenBLE_UUIDs.h" "$(ProjectDir)..\Include\MiTokenBLE_UUIDs.h"</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>MkDir "$(ProjectDir)..\Lib\$(PlatformTarget)\$(Configuration)"
+Copy "$(OutDir)$(TargetFileName)" "$(ProjectDir)..\Lib\$(PlatformTarget)\$(Configuration)\$(TargetFileName)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;USE_APITYPES_HEADER;_NOPRINT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <PreBuildEvent>
+      <Command>Mkdir "$(ProjectDir)..\Include"
+Copy "$(ProjectDir)BLE_API.h" "$(ProjectDir)..\Include\BLE_API.h"
+Copy "$(ProjectDir)BLE_API_Ext.h" "$(ProjectDir)..\Include\BLE_API_Ext.h"
+Copy "$(ProjectDir)BLE_API_Types.h" "$(ProjectDir)..\Include\BLE_API_Types.h"
+Copy "$(ProjectDir)BLE_API_ExtraTypes.h" "$(ProjectDir)..\Include\BLE_API_ExtraTypes.h"
+Copy "$(ProjectDir)MiTokenBLE_UUIDs.h" "$(ProjectDir)..\Include\MiTokenBLE_UUIDs.h"</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>MkDir "$(ProjectDir)..\Lib\$(PlatformTarget)\$(Configuration)"
+Copy "$(OutDir)$(TargetFileName)" "$(ProjectDir)..\Lib\$(PlatformTarget)\$(Configuration)\$(TargetFileName)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;USE_APITYPES_HEADER;_NOPRINT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
+    <PreBuildEvent>
+      <Command>Mkdir "$(ProjectDir)..\Include"
+Copy "$(ProjectDir)BLE_API.h" "$(ProjectDir)..\Include\BLE_API.h"
+Copy "$(ProjectDir)BLE_API_Ext.h" "$(ProjectDir)..\Include\BLE_API_Ext.h"
+Copy "$(ProjectDir)BLE_API_Types.h" "$(ProjectDir)..\Include\BLE_API_Types.h"
+Copy "$(ProjectDir)BLE_API_ExtraTypes.h" "$(ProjectDir)..\Include\BLE_API_ExtraTypes.h"
+Copy "$(ProjectDir)MiTokenBLE_UUIDs.h" "$(ProjectDir)..\Include\MiTokenBLE_UUIDs.h"</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>MkDir "$(ProjectDir)..\Lib\$(PlatformTarget)\$(Configuration)"
+Copy "$(OutDir)$(TargetFileName)" "$(ProjectDir)..\Lib\$(PlatformTarget)\$(Configuration)\$(TargetFileName)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BLE_Command_Chain_Link.cpp" />
+    <ClCompile Include="GenericUtils.cpp" />
+    <ClCompile Include="MiTokenBLE_Commands.cpp" />
+    <ClCompile Include="SafeObject.cpp" />
+    <ClCompile Include="BLE_API.cpp" />
+    <ClCompile Include="BLE_API_Ext.cpp" />
+    <ClCompile Include="BLE_ASYNC.cpp" />
+    <ClCompile Include="BLE_Callbacks.cpp" />
+    <ClCompile Include="BLE_IO.cpp" />
+    <ClCompile Include="BLE_LowLevel.cpp" />
+    <ClCompile Include="BLE_NamedPipe.cpp" />
+    <ClCompile Include="BLE_Structs.cpp" />
+    <ClCompile Include="cmd_def.cpp" />
+    <ClCompile Include="commands.cpp" />
+    <ClCompile Include="COMReader.cpp" />
+    <ClCompile Include="CurrentState.cpp" />
+    <ClCompile Include="DebugLogging.cpp" />
+    <ClCompile Include="MessageQueue.cpp" />
+    <ClCompile Include="MiTokenBLE.cpp" />
+    <ClCompile Include="MiTokenBLEChild.cpp" />
+    <ClCompile Include="MiTokenBLEConnection.cpp" />
+    <ClCompile Include="MiTokenBLE_UUIDs.h" />
+    <ClCompile Include="ReadWriteLocker.cpp" />
+    <ClCompile Include="ScopedLock.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="apitypes.h" />
+    <ClInclude Include="BLELib.h" />
+    <ClInclude Include="BLE_API.h" />
+    <ClInclude Include="BLE_API_Ext.h" />
+    <ClInclude Include="BLE_API_ExtraTypes.h" />
+    <ClInclude Include="BLE_API_Types.h" />
+    <ClInclude Include="BLE_ASYNC.h" />
+    <ClInclude Include="BLE_Callbacks.h" />
+    <ClInclude Include="BLE_Command_Chain_Link.h" />
+    <ClInclude Include="BLE_IO.h" />
+    <ClInclude Include="BLE_LowLevel.h" />
+    <ClInclude Include="BLE_NamedPipe.h" />
+    <ClInclude Include="BLE_Structs.h" />
+    <ClInclude Include="cmd_def.h" />
+    <ClInclude Include="COMReader.h" />
+    <ClInclude Include="CurrentState.h" />
+    <ClInclude Include="DebugLogging.h" />
+    <ClInclude Include="GenericUtils.h" />
+    <ClInclude Include="IConstReader.h" />
+    <ClInclude Include="MessageQueue.h" />
+    <ClInclude Include="MiTokenBLE.h" />
+    <ClInclude Include="MiTokenBLEChild.h" />
+    <ClInclude Include="MiTokenBLEConnection.h" />
+    <ClInclude Include="MiTokenBLEPriv.h" />
+    <ClInclude Include="MiTokenBLE_Commands.h" />
+    <ClInclude Include="NPReader.h" />
+    <ClInclude Include="ReadWriteLocker.h" />
+    <ClInclude Include="SafeObject.h" />
+    <ClInclude Include="ScopedLock.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

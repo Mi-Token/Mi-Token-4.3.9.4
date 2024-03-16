@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiTokenOfflineTokenSync", "MiTokenOfflineTokenSync\MiTokenOfflineTokenSync.csproj", "{44CCECAA-459B-4A30-961C-1D0829A60F63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceTester", "ServiceTester\ServiceTester.csproj", "{1B1FAE4F-9312-4128-B1C4-4F57D07DC8FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OTP Cache Config", "OTP Cache Config\OTP Cache Config.csproj", "{AEAF6EC8-8490-416B-8D19-AC34D671F8A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44CCECAA-459B-4A30-961C-1D0829A60F63}.Debug|x64.ActiveCfg = Debug|x64
+		{44CCECAA-459B-4A30-961C-1D0829A60F63}.Debug|x64.Build.0 = Debug|x64
+		{44CCECAA-459B-4A30-961C-1D0829A60F63}.Debug|x86.ActiveCfg = Debug|x86
+		{44CCECAA-459B-4A30-961C-1D0829A60F63}.Debug|x86.Build.0 = Debug|x86
+		{44CCECAA-459B-4A30-961C-1D0829A60F63}.Release|x64.ActiveCfg = Release|x64
+		{44CCECAA-459B-4A30-961C-1D0829A60F63}.Release|x64.Build.0 = Release|x64
+		{44CCECAA-459B-4A30-961C-1D0829A60F63}.Release|x86.ActiveCfg = Release|x86
+		{44CCECAA-459B-4A30-961C-1D0829A60F63}.Release|x86.Build.0 = Release|x86
+		{1B1FAE4F-9312-4128-B1C4-4F57D07DC8FC}.Debug|x64.ActiveCfg = Debug|x64
+		{1B1FAE4F-9312-4128-B1C4-4F57D07DC8FC}.Debug|x64.Build.0 = Debug|x64
+		{1B1FAE4F-9312-4128-B1C4-4F57D07DC8FC}.Debug|x86.ActiveCfg = Debug|x86
+		{1B1FAE4F-9312-4128-B1C4-4F57D07DC8FC}.Debug|x86.Build.0 = Debug|x86
+		{1B1FAE4F-9312-4128-B1C4-4F57D07DC8FC}.Release|x64.ActiveCfg = Release|x64
+		{1B1FAE4F-9312-4128-B1C4-4F57D07DC8FC}.Release|x64.Build.0 = Release|x64
+		{1B1FAE4F-9312-4128-B1C4-4F57D07DC8FC}.Release|x86.ActiveCfg = Release|x86
+		{1B1FAE4F-9312-4128-B1C4-4F57D07DC8FC}.Release|x86.Build.0 = Release|x86
+		{AEAF6EC8-8490-416B-8D19-AC34D671F8A3}.Debug|x64.ActiveCfg = Debug|x86
+		{AEAF6EC8-8490-416B-8D19-AC34D671F8A3}.Debug|x86.ActiveCfg = Debug|x86
+		{AEAF6EC8-8490-416B-8D19-AC34D671F8A3}.Debug|x86.Build.0 = Debug|x86
+		{AEAF6EC8-8490-416B-8D19-AC34D671F8A3}.Release|x64.ActiveCfg = Release|x86
+		{AEAF6EC8-8490-416B-8D19-AC34D671F8A3}.Release|x86.ActiveCfg = Release|x86
+		{AEAF6EC8-8490-416B-8D19-AC34D671F8A3}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

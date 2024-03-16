@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix RequiredVersion="3.8.1128.0" xmlns="http://schemas.microsoft.com/wix/2006/wi"
+                                  xmlns:extbal="http://schemas.microsoft.com/wix/BalExtension"
+                                  xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+
+  <?define ProductName="Mi-Token Credential Provider"?>
+  <?define ProductVersion=$(var.BuildVersion)?>
+  <?define UpgradeCode="{7B55F999-AB35-46c0-BD98-05B072B25E16}"?>
+
+  <?if $(var.Platform) = "x86" ?>
+  <?define Win64 = "no" ?>
+  <?else?>
+  <?define Win64 = "yes" ?>
+  <?endif?>
+
+  <Bundle Name="$(var.ProductName) $(var.ProductVersion)"
+          Version="!(bind.packageVersion.Package1)" Manufacturer="Mi-Token Inc."
+          UpgradeCode="$(var.UpgradeCode)" IconSourceFile="..\..\..\RADIUS\setup\Mi-Token.ico"
+          AboutUrl="mi-token.com" Copyright="Copyright © 2010 Mi-Token Inc. All Rights Reserved." 
+          Compressed="yes" HelpUrl="mi-token.com/support">
+    
+    <BootstrapperApplicationRef Id="WixExtendedBootstrapperApplication.HyperlinkLicense">
+      <extbal:WixExtendedBootstrapperApplication SuppressOptionsUI="yes" LicenseUrl="" />
+      <Payload SourceFile="Resources\LogoSide.png" />
+    </BootstrapperApplicationRef>
+
+    <WixVariable Id="WixExtbaThemeXml" Value="Resources\Bundle3Theme.xml" />
+    <WixVariable Id="WixExtbaThemeWxl" Value="Resources\1031\HyperlinkLocaleTheme.wxl" />
+
+    <Variable Name="USEAC" extbal:Overridable="yes" Value="0"/>
+    
+		<Chain>
+      <PackageGroupRef Id="DotNetAndVCRedist"/>
+      <RollbackBoundary />
+      <MsiPackage Id="Package1" SourceFile="$(var.Installer.TargetPath)" DisplayInternalUI="yes"
+                  Vital="yes" Visible="no" Compressed="yes" EnableFeatureSelection="no">
+        <MsiProperty Name="USEAC" Value="[USEAC]"/>
+      </MsiPackage>
+      
+			<!-- TODO: Define the list of chained packages. -->
+			<!-- <MsiPackage SourceFile="path\to\your.msi" /> -->
+		</Chain>
+	</Bundle>
+
+
+
+  <Fragment>
+    <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Microsoft\Net Framework Setup\NDP\v4\Full" Value="Install" Variable="Netfx4FullVersion" Win64="no" />
+    <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Microsoft\Net Framework Setup\NDP\v4\Full" Value="Install" Variable="Netfx4x64FullVersion" Win64="yes" />
+    <util:FileSearch Path="[WindowsFolder]Sysnative\msvcp100.dll" Variable="VCRedistFile1" Result="exists" />
+    <util:FileSearch Path="[WindowsFolder]Sysnative\msvcr100.dll" Variable="VCRedistFile2" Result="exists" />
+    <util:FileSearch Path="[WindowsFolder]System32\msvcp100.dll" Variable="VCRedistFile1X86" Result="exists" />
+    <util:FileSearch Path="[WindowsFolder]System32\msvcr100.dll" Variable="VCRedistFile2X86" Result="exists" />
+    <PackageGroup Id="DotNetAndVCRedist">
+      <ExePackage Id="DotNet4FullExe"
+                  InstallCommand="/q /norestart /ChainingPackage &quot;[WixBundleName]&quot; "
+                  RepairCommand="/q /norestart /repair /ChainingPackage &quot;[WixBundleName]&quot; "
+                  UninstallCommand="/uninstall /q /norestart /ChainingPackage &quot;[WixBundleName]&quot; "
+                  PerMachine="yes"
+                  DetectCondition="(Netfx4FullVersion = 1) OR (Netfx4x64FullVersion = 1)"
+                  InstallCondition="(Netfx4FullVersion &lt;&gt; 1) AND (Netfx4x64FullVersion &lt;&gt; 1)"
+                  Vital="yes"
+                  Permanent="yes"
+                  Compressed="yes"
+                  Name="Microsoft .NET 4.0 Framework Web Install"
+                  SourceFile="..\..\..\RADIUS\libs\DotNet-4.0\dotNetFx40_Full_setup.exe">
+      </ExePackage>
+      <?if $(var.Win64) = "yes"?>
+      <ExePackage Id="VC2010SP1Redist"
+                  InstallCommand="/q /norestart /ChainingPackage &quot;[WixBundleName]&quot; "
+                  RepairCommand="/q /norestart /repair /ChainingPackage &quot;[WixBundleName]&quot; "
+                  UninstallCommand="/uninstall /q /norestart /ChainingPackage &quot;[WixBundleName]&quot; "
+                  PerMachine="yes"
+                  DetectCondition="VCRedistFile1 AND VCRedistFile2"
+                  InstallCondition="((NOT VCRedistFile1) OR (NOT VCRedistFile2) AND VersionNT64)"
+                  Vital="yes"
+                  Permanent="yes"
+                  Compressed="yes"
+                  Name="Microsoft Visual C++ 2010 SP1 Redistributable Package (x64)"
+                  SourceFile="..\..\..\RADIUS\libs\vc_2010sp1_redist\Installer\vcredist_x64.exe">
+      </ExePackage>
+      <?else ?>
+      <ExePackage Id="VC2010SP1RedistX32"
+                  InstallCommand="/q /norestart /ChainingPackage &quot;[WixBundleName]&quot; "
+                  RepairCommand="/q /norestart /repair /ChainingPackage &quot;[WixBundleName]&quot; "
+                  UninstallCommand="/uninstall /q /norestart /ChainingPackage &quot;[WixBundleName]&quot; "
+                  PerMachine="yes"
+                  DetectCondition="VCRedistFile1 AND VCRedistFile2"
+                  InstallCondition="((NOT VCRedistFile1X86) OR (NOT VCRedistFile2X86) AND  (NOT VersionNT64))"
+                  Vital="yes"
+                  Permanent="yes"
+                  Compressed="yes"
+                  Name="Microsoft Visual C++ 2010 SP1 Redistributable Package (x32)"
+                  SourceFile="..\..\..\RADIUS\libs\vc_2010sp1_redist\Installer\vcredist_x86.exe">
+      </ExePackage>
+      <?endif ?>
+    </PackageGroup>
+  </Fragment>
+</Wix>

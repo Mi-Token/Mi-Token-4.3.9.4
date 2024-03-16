@@ -1,0 +1,52 @@
+<Project DefaultTargets="BuildAll" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask TaskName="GetPropertiesFromPath" AssemblyFile="..\RADIUS\build\MiToken.Build.CustomTasks\bin\Debug\MiToken.Build.CustomTasks.dll" />
+  <UsingTask TaskName="RoboCopy"              AssemblyFile="..\RADIUS\build\MiToken.Build.CustomTasks\bin\Debug\MiToken.Build.CustomTasks.dll" />
+  <UsingTask TaskName="DevEnv"                AssemblyFile="..\RADIUS\build\MiToken.Build.CustomTasks\bin\Debug\MiToken.Build.CustomTasks.dll" />
+  <UsingTask TaskName="HelpAndManual"         AssemblyFile="..\RADIUS\build\MiToken.Build.CustomTasks\bin\Debug\MiToken.Build.CustomTasks.dll" />
+  <UsingTask TaskName="SignTool"              AssemblyFile="..\RADIUS\build\MiToken.Build.CustomTasks\bin\Debug\MiToken.Build.CustomTasks.dll" />
+  
+  <PropertyGroup Condition=" '$(MiToken_Output_Directory)' == '' ">
+    <MiToken_Output_Directory>c:\mitoken_builds\latest\</MiToken_Output_Directory>
+  </PropertyGroup>
+  
+    <PropertyGroup>
+      <VS11>$(Registry:HKEY_CLASSES_ROOT\VisualStudio.DTE.11.0\CLSID)</VS11>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(MiToken_Output_Bitness)' == '32' ">
+    <MiToken_Build_Platform>x86</MiToken_Build_Platform>
+    <MiToken_Build_Platform_Setup>x86</MiToken_Build_Platform_Setup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(MiToken_Output_Bitness)' == '64' ">
+    <MiToken_Build_Platform>x64</MiToken_Build_Platform>
+    <MiToken_Build_Platform_Setup>x64</MiToken_Build_Platform_Setup>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+     <Build_Targets>
+		 BuildCacheClientService;
+		 CopyInstallers
+     </Build_Targets>
+  </PropertyGroup>
+    
+    <Target Name="BuildAll" DependsOnTargets="$(Build_Targets)" />
+
+	<Target Name="BuildCacheClientService">
+		<DevEnv Solution="Gina\MiTokenGINA.sln"
+				SolutionConfiguration="Release"
+				SolutionPlatform="x64"
+				Project="CacheUpdaterInstallerClientBootstrapper"
+				Target="Rebuild"
+				Version="11" />
+	</Target>
+	
+	<Target Name="CopyInstallers">
+			 
+    <RoboCopy Source="..\Radius\setup\build\release"
+              Destination="$(MiToken_Output_Directory)$(MiToken_Build_Platform_Setup)"
+	          Options="/S /R:1 /W:1 /NP" />
+
+  </Target>
+	
+</Project>
+
