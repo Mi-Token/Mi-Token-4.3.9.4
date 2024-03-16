@@ -44,5 +44,5 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Mi-Token_Mi-Token-4.3.9.4" /o:"mi-token" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          <insert_your_build_command>
+          dotnet sonarscanner begin /d:sonar.login=$SONAR_TOKEN /k:"your_project_key" /d:sonar.host.url="https://sonarcloud.io" && dotnet build && dotnet sonarscanner end /d:sonar.login=$SONAR_TOKEN
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
